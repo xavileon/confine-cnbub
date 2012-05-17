@@ -1,0 +1,164 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+  \graphicspath{{.}{images/}{pdf/}{jpeg/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  \usepackage[dvips]{graphicx}
+  \graphicspath{{.}{images/}{../eps/}}
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+\usepackage{url}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+
+\title{CONFINE: the testbed for community networks}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Xavier León, Felix freitag and Leandro Navarro}
+\IEEEauthorblockA{Departament d'Arquitectura de Computadors\\
+Universitat Politècnica de Catalunya\\
+Barcelona, Spain\\
+\texttt{\{xleon, felix, leandro\}@ac.upc.edu}}
+\and
+\IEEEauthorblockN{Axel Neumann and Iván Vilata}
+\IEEEauthorblockA{Pangea.org\\
+NGO Internet Solidario\\
+Barcelona, Spain\\
+\texttt{neumann@cgws.de, ivan@pangea.org}}}
+
+\maketitle
+
+
+\begin{abstract}
+The abstract goes here. bla bla bla?
+\end{abstract}
+
+\section{Introduction}
+
+- on testbed for researchers in Community networks.
+(maybe there are parts in DoW from Confine that can be copied)
+
+1.1 why is research in CN important (Confine-Brochure in www.confine-project.eu)
+  - to support growth of CNs (scalability, sustainability)
+  - future internet and digital agenda
+
+1.2 what research in CN (CN shortomings)
+  - howto impove privacy
+  - networking robustness (eg routing optimization, cross-layer optimizations)
+  - efficient content distribution
+  - network policies evaluation/optimization
+  - heterogenous physical networks (wireless, broadband fiber)
+  - node robustness (eg automatic reconfiguration, deployment, failure handling...)
+
+1.3 why difficult to do reasearch? (Researcher shortcomings)
+   - there are no real-life CN testbeds (only small lab deployments)
+   - no existing implementations available
+   - community driven effort (not a controlled lab)
+
+\section{Related Work}
+
+I cite here planetlab \cite{planetlab}
+
+= Other testbeds, what they offer (PlanetLab (Xavi knows well), and wireless
+testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
+
+\section{Challenges and Requirements}
+
+
+2. what challenges it poses to develop a testbed on top of it. ( 3 pages )
+  - keep stability and security
+  - keep CN privacy
+  - researcher affiliation != testbed management ?!= node ownership
+  - usablitiy (simple API despite system complexity)
+  - not CPU powerful devices (cheap)
+  - remote locations
+  - connection instability, variable connectivity and available bandwidth
+  - cross-CN communication (testbed spanning several CNs)
+  - lack of IPv6 support in existing CNs (tinc workaround)
+
+\section{CONFINE architecture}
+
+\subsection{Long-term vision}
+
+3.1 architecture (envisioned arch:node)
+-integration in community networks
+\subsection{Current state}
+3.2 current state
+- implementation (target CONFINED)
+- note on IPv6 overlay
+\subsection{Next steps}
+3.3 next steps
+- 2n year implementation (between CONFINED and envisioned)
+
+\subsection{Discussion}
+
+Compare the Confine node architecture's features/potential ... with that of
+related work.
+(there was a mail from Axel some weeks ago: He mentioned the unique features of
+Confine: parallel experiments (other wireless networks are not virtualized) +
+long term studies (since other testbeds have dedicated nodes, users will not be
+allowed to block them for too long I guess ...)
+
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+
+
+
+\section{Conclusion}
+The conclusion goes here.
+
+
+\section*{Acknowledgment}
+
+The authors would like to thank...
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+\bibliographystyle{IEEEtran}
+\bibliography{confine-cnbub}
+
+\end{document}
+
+
