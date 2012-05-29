@@ -34,7 +34,7 @@ Universitat Politècnica de Catalunya\\
 Barcelona, Spain\\
 \texttt{\{xleon, felix, leandro\}@ac.upc.edu}}
 \and
-\IEEEauthorblockN{Axel Neumann and Iván Vilata}
+\IEEEauthorblockN{Axel Neumann and Ivan Vilata}
 \IEEEauthorblockA{Pangea.org\\
 NGO Internet Solidario\\
 Barcelona, Spain\\
@@ -76,8 +76,11 @@ I cite here planetlab \cite{planetlab}
 = Other testbeds, what they offer (PlanetLab (Xavi knows well), and wireless
 testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
+% Ivan: I need a small introduction to the concept of slice and sliver.
+
 \section{Challenges and Requirements}
 
+% Ivan: I need a reference to slice and network isolation.
 
 2. what challenges it poses to develop a testbed on top of it. ( 3 pages )
   - keep stability and security
@@ -92,14 +95,305 @@ testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
 \section{CONFINE architecture}
 
+A CONFINE testbed consists of at least one \emph{server} or \emph{controller}
+and a set of \emph{nodes} which can be spread over several community networks
+(CNs).  A server is a normal computer which is publicly reachable inside of a
+CN.  A node can be an integral part of a CN: in contrast with a boundary host,
+a CONFINE node can relay other CN traffic not related with CONFINE.
+
+The design described below intends to facilitate the addition of CONFINE nodes
+in any location of a CN by connecting additional devices to existing CN nodes
+with minimum or no CONFINE-specific configuration changes to existing devices.
+
 \subsection{Long-term vision}
 
-3.1 architecture (envisioned arch:node)
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{node-arch}
+\caption{The architecture of a CONFINE node.}
+\label{fig:node-arch}
+\end{figure}
+
+As shown in figure \ref{fig:node-arch}, a \textbf{CONFINE node} (node)
+consists of two or three devices: the \textbf{community device} (CD), the
+\textbf{research device} (RD) and an optional \textbf{recovery device}.  All
+devices in a node are linked by a wired \textbf{local network} (LN), possibly
+shared with other non-CONFINE devices like CN clients using the CD as a
+gateway.
+
+\subsubsection{The community device}
+
+The CD is a \emph{completely normal community network device} with at least
+two different network interfaces: a wired or wireless one for the CN (a
+\textbf{community interface} with a \textbf{community address}) and a wired
+one for the LN (the \textbf{gateway interface} with its \textbf{gateway
+  address}).  It can act as a simple gateway for hosts connected to the LN,
+and it allows some of them to have fixed addresses, i.e. addresses that will
+not be assigned by the CD to other devices in the LN via DHCP.
+
+The node is accessed by testbed servers, administrators and researchers via
+the community interfaces of the CD, although node administration may
+occasionally proceed directly through the LN.
+
+\subsubsection{The research device}
+
+The RD is a relatively powerful device (compared to the CD) running a
+\emph{customised OpenWrt firmware} provided by CONFINE which allows running
+several \emph{slivers} at the same time as Linux containers \cite{lxc}.
+Slivers have limited access to the device's resources and to one another, thus
+ensuring slice and network \emph{isolation}.  This is guaranteed by the
+\textbf{control software} run in the RD through tools like \texttt{ebtables},
+\texttt{arptables}, \texttt{iptables}, \texttt{tc}, Open vSwitch…
+
+% XXXX lxc: http://lxc.sourceforge.net/ "Linux containers"
+
+The RD implements an \textbf{internal bridge} with an \textbf{internal
+  address} that is the same in all testbed nodes and which belongs to a
+private network which does not clash with CN or LN addresses.  The RD offers
+some basic \textbf{sliver services} (see below) on the internal address,
+including NAT gateway access to the CN.
+
+The RD also implements a \textbf{local bridge} which connects to the LN
+through a wired interface (the \textbf{local interface}).  The bridge is used
+for simple network layer access to the CN through the CD's gateway address,
+and the \textbf{local address} of the RD in it is fixed and used for testbed
+management and remote administration.  For easy RD setup and local
+administration, the local interface may also sport a \textbf{recovery address}
+that is easily predictable or the same in all testbed nodes and that belongs
+to a private network which does not clash with CN or LN addresses (nor those
+of the internal bridge).  A \textbf{debug address} which is also private and
+easily predictable can be used to access different RDs in the same local
+network for debugging purposes.
+
+The RD may have additional \textbf{direct interfaces}, each one connected to
+its own \textbf{direct bridge}.  These interfaces may be connected to the CN
+at the link layer.
+
+All the aforementioned bridges are managed by the control software in order to
+ensure network isolation between slices (i.e. between slivers running in the
+RD) as mentioned above, and to keep CN stability and privacy.
+
+\subsubsection{The recovery device}
+
+The node may include some simple recovery device (which may also be managed
+through the LN) whose purpose is to \emph{force reboot} of the RD in case of
+severe malfunction using some direct hardware mechanism, like a GPIO port
+connected to the power supply of the RD.  The recovery device may get remote
+instructions from the CN (via the LN) or via different sensors, preferably
+based on wide-range technologies suffering from low interference and differing
+from those used by the CN (like ham radio signals, GSM calls or SMS).  It may
+also receive a \emph{heartbeat signal} kept by control software via some
+direct link like a serial line; when the recovery device misses a number of
+heartbeats, it reboots the RD.
+
+A more advanced version of this device may help the RD boot some recovery
+environment (e.g. via PXE) or collaborate in some techniques for safe device
+upgrade and recovery (see \cite{van12}) to allow restoring its firmware to a
+known state.
+
+% XXXX van12: https://archive.fosdem.org/2012/schedule/event/safe_upgrade_of_embedded_systems.html "Safe upgrade of embedded systems" Arnaut Vandecappelle, FOSDEM 2012
+
+\subsubsection{Node and sliver connectivity}
+
+The research and recovery devices have fixed addresses in the LN and they need
+no routing protocol software to reach the CN: they simply use the CD's gateway
+address as a default gateway.  Static configuration or DHCP suffice as long as
+the addresses they get are fixed.
+
+In contrast, the connectivity of a sliver is determined by the network
+interfaces it sports, which are requested by the researcher at sliver
+definition time and depend on the interfaces provided by the RD and their
+features.  Default routing configuration is explicitly controlled by the
+researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
+
+\begin{itemize}
+\item Every sliver has a \textbf{private interface and address} whose host
+  side \emph{veth} interface is placed in the internal bridge.  The address is
+  automatically assigned from the RD's private network, thus allowing access
+  to the RD's internal address and sliver services (see below).  The
+  researcher may choose to use the latter address as the default gateway, in
+  which case traffic is routed by the RD through the local bridge to the CD's
+  gateway address after performing NAT.  This allows \emph{client access to
+    the CN} but not connections from the CN to the sliver (similar to a home
+  computer behind a NAT gateway on the Internet) \emph{nor traffic between
+    slivers}.  Thus the sliver is ensured that there will be no incoming
+  connections on that interface, obviating the need for firewalls or access
+  control.  Sliver container 1 in figure \ref{fig:node-arch} only has a
+  private interface in the internal bridge.
+
+\item If the RD has been allocated some public addresses, the researcher may
+  request a \textbf{public interface and address} whose host side \emph{veth}
+  interface will be placed in the local bridge, thus allowing access to the
+  LN.  The address is automatically assigned from the RD's public ones, and
+  the researcher may choose to use the CD's gateway address as the default
+  gateway.  This allows \emph{connections from the CN to the sliver} (similar
+  to a computer directly connected to the Internet through a normal gateway).
+  Sliver container 2 in figure \ref{fig:node-arch} has a public interface in
+  the local bridge.
+
+\item If the RD has a direct interface, the researcher may request a
+  \textbf{passive interface} (with no address) whose host side \emph{veth}
+  interface is placed in the associated direct bridge, thus allowing direct
+  access to the CN.  Permission is granted only for \emph{traffic capture} on
+  the passive interface, which is mangled by control software to ensure CN
+  privacy (e.g. by implementing the bridge as an Open vSwitch-based switch
+  \cite{open-vswitch} which performs traffic anonymization).  Sliver
+  containers 3 and 5 in figure \ref{fig:node-arch} have passive interfaces in
+  direct bridge X.
+
+% XXXX open-vswitch: http://openvswitch.org/ "Open vSwitch"
+
+\item If the RD has a direct interface, the researcher may request an
+  \textbf{isolated interface} (with no address), i.e. a VLAN interface on the
+  associated direct bridge using one of the VLAN tags allocated to the slice
+  at creation time.  This allows \emph{any kind of traffic, including routing
+    protocols, to be transmitted and captured} at the cost of being isolated
+  from the CN at the link layer.  Sliver container 4 in figure
+  \ref{fig:node-arch} has an isolated interface on direct bridge X.
+
+\item If the RD has a direct interface, the researcher may request \emph{raw
+  access} to the interface's network device.  The \textbf{raw interface} is
+  \emph{moved} into the sliver container and the associated direct bridge is
+  disabled while the sliver is running.  Since the sliver has full control on
+  the network device, network isolation can not be guaranteed, so only that
+  sliver is allowed to run in the RD.  Moreover, this access can disrupt CN
+  operation and privacy, so it should only be allowed \emph{under very
+    particular circumstances} (e.g. out of reach of the CN).  Sliver container
+  5 in figure \ref{fig:node-arch} \emph{owns} the RD's direct interface Y.
+
+\end{itemize}
+
+Besides the included private interface, a sliver may be granted several
+interfaces using the local bridge or any direct bridge.  Conversely, the local
+bridge or a direct bridge may provide several slivers with shared access to
+the same interface; however, since raw access to a direct interface disables
+its bridge, a running sliver granted a raw interface excludes other slivers
+from using the same interface.
+
+The setup of a sliver's networking is accomplished by populating its image
+with appropriate configuration files.  Static configuration allows testbed
+servers to know the addresses of a sliver \emph{a priori} (so they can be
+propagated to other slivers in the same slice) and it can be helpful in the
+configuration of routing, filtering and traffic control rules in the RD.
+
+\subsubsection{Sliver services}
+
+The RD offers on its internal address some basic services which become
+available to slivers through their private interfaces.  This setup intends to
+relieve researchers from configuring those services themselves while providing
+some features tailored for CONFINE slivers (some of which are not feasible at
+the sliver level), all in a trivial and reliable manner by accessing an
+address which is always the same on an interface which is always available and
+closed to external access.  Factoring services out of the slivers also saves
+resources and minimizes the changes of breakage by accidental misconfiguration
+on the sliver.  Some examples of these (optional) services are:
+
+\begin{itemize}
+\item DNS: The RD acts as a name server, possibly with customized testbed- or
+  slice-wide domains.
+\item SMTP: The RD acts as a mail gateway, possibly rewriting source mail
+  addresses for easy sliver identification.
+\item A NAT gateway for slivers needing basic client-only connectivity to the
+  network.
+\item A DHCP service which can be used by a sliver as a last resort to regain
+  minimum (NAT) connectivity in case of lost network configuration.
+\item DLEP \cite{dlep} can offer slivers information about link quality and
+  speed information from network devices (useful for routing experiments using
+  cross-layer information).
+\item Other CONFINE-specific services for retrieving testbed or slice
+  information, or running privileged operations in the RD (like PlanetLab's
+  vSys \cite{vsys}).
+\end{itemize}
+
+% XXXX dlep: http://tools.ietf.org/html/draft-ietf-manet-dlep-02 "Dynamic Link Exchange Protocol (DLEP)" IETF draft
+% XXXX vsys: http://www.cs.princeton.edu/~sapanb/vsys/ "vSys"
+
+\subsubsection{Out-of-band access to slivers}
+
+Regardless of whether a slice has network access at a given moment, a
+researcher can access any of its slivers through the RD's local address in a
+way similar to PlanetLab or Linode's Lish \cite{lish}, allowing for remote
+command execution and file transfer for collecting experiment results.
+
+% XXXX lish: http://library.linode.com/troubleshooting/using-lish-the-linode-shell "Lish" Linode, LLC
+
+\subsubsection{The community container}
+
+This architecture also allows a low-cost version where the CD runs inside the
+RD as a \textbf{community container} (CC) thus saving on hardware at the price
+of stability.  In this case each community interface is considered a direct
+interface in the RD, and the CC has a \emph{veth} interface placed in its
+associated bridge.  The gateway interface of the CC is a \emph{veth} interface
+placed in the local bridge, and the RD's local interface can be kept for wired
+node administration and for other non-CONFINE devices.  The CC has few
+restrictions on the local and direct interfaces while slivers can still access
+them via passive or isolated interfaces (but not as raw interfaces).  The CC
+may manage several direct interfaces in this way.
+
+XXXX begin: Pau
 -integration in community networks
+XXXX end: Pau
+
 \subsection{Current state}
+
+XXXX begin: Axel
 3.2 current state
 - implementation (target CONFINED)
-- note on IPv6 overlay
+XXXX end: Axel
+
+\subsubsection{The IPv6 overlay}
+
+Creating testbeds that span several community networks (CNs) is drastically
+hampered by their lack of widespread IPv6 support.  They normally use private
+IPv4 addressing that (in spite of initiatives like Free Networks
+\cite{free-networks}) can not be trusted to be compatible across CNs.  Also,
+the diversity of CN devices using IPv4 mean that research devices may sit
+behind NAT boxes or firewalls further limiting their reachability.  IPv4
+address scarcity also keeps the testbed from using a clean and uniform
+addressing scheme for their elements.
+
+% XXXX free-networks: http://freenetworks.org/ "Free Networks association"
+
+IPv6 migration solutions like 6to4 \cite{6to4}, 6in4 \cite{6in4}, ISATAP
+\cite{isatap} or Teredo \cite{teredo} either have problems with protocol 41
+handling in NAT boxes or firewalls, or use host IPv4-based addresses which can
+clash between CNs.  Together with most VPN solutions they get complicated to
+setup in a mesh-like cloud, or use centralized architectures which alter the
+resulting topology and can turn the VPN server into a bottleneck.
+
+% XXXX 6to4: http://www.ietf.org/rfc/rfc3056.txt "Connection of IPv6 Domains via IPv4 Clouds" IETF RFC 3056
+% XXXX 6in4: http://www.ietf.org/rfc/rfc4213.txt "Basic Transition Mechanisms for IPv6 Hosts and Routers" IETF RFC 4213
+% XXXX isatap: http://www.isatap.org/ "Intra-Site Automatic Tunnel Addressing Protocol (ISATAP)"
+% XXXX teredo: http://www.ietf.org/rfc/rfc4380.txt "Teredo: Tunneling IPv6 over UDP through Network Address Translations (NATs)" IETF RFC 4380
+
+\begin{figure}[!t]
+\centering
+% XXXX \includegraphics[width=\linewidth]{ipv6-overlay}
+\caption{The IPv6 overlay spanning two community networks.}
+\label{fig:ipv6-overlay}
+\end{figure}
+
+A CONFINE testbed works around these problems by creating an \textbf{IPv6
+  overlay} based on the \emph{tinc} \cite{tinc} VPN software.  \emph{Tinc}
+allows setting up a mesh network where data is exchanged directly between
+endpoints with the VPN software taking care of routing traffic and propagating
+endpoint information, thus needing minimal configuration.
+
+As shown in
+figure \ref{fig:ipv6-overlay}, nodes in a CN connect to the testbed server or a CN gateway which
+
+addressing /48 servers, gateways, node devices, slivers, hosts
+
+Since the overlay makes all elements in the testbed easily reachable through
+predictable IPv6 addresses with automatic encryption and authentication
+between endpoints, the IPv6 overlay is used as a \textbf{management network}.
+These may make the use of the IPv6 overlay interesting even after CNs gain
+widespread IPv6 support.
+
+% XXXX tinc: http://www.tinc-vpn.org/ "tinc"
+
+XXXX
+
 \subsection{Next steps}
 3.3 next steps
 - 2n year implementation (between CONFINED and envisioned)
@@ -162,3 +456,6 @@ The authors would like to thank...
 \end{document}
 
 
+
+%%  LocalWords:  testbed testbeds CN CNs GSM SMS anonymization reachability
+%%  LocalWords:  RD's vSwitch
