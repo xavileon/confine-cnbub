@@ -16,13 +16,15 @@
 
 \usepackage{url}
 
+\usepackage{color}
+
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
 \begin{document}
 
-\title{CONFINE: the testbed for community networks}
+\title{Community-Lab: vision and architecture of a community networking testbed for the Future Internet}
 
 
 % author names and affiliations
@@ -44,39 +46,144 @@ Barcelona, Spain\\
 
 
 \begin{abstract}
-The abstract goes here. bla bla bla?
+Community networks are an emerging and successful model for the Future Internet
+across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet
+Research and Experimentation) infrastructures by establishing Community-Lab,
+a new facility built on the federation of
+existing community IP networks constituted by more than 20,000 nodes and 20,000
+Km of links. These unique infrastructures pose an interesting set of challenges different from existing
+testbeds. In this paper we present the benefits of having such testbed for the research community 
+as well as the improvement and evolution of community networks themselves and describes our long-term vision
+for the community network testbed and its current state of implementation.
 \end{abstract}
 
 \section{Introduction}
 
-- on testbed for researchers in Community networks.
-(maybe there are parts in DoW from Confine that can be copied)
+In the recent years, the perception of the key role of Internet access for the
+digital society and the size, growth and scope of the Internet and has put under stress
+its architecture and protocols. The growing Internet penetration at homes, schools,
+workplaces, and any public or private organisation, the introduction of very demanding
+and QoS-sensitive applications like distribution of large files, interactive multimedia,
+real-time audio and video, results in an explosive growth in the demand for capacity.
 
-1.1 why is research in CN important (Confine-Brochure in www.confine-project.eu)
-  - to support growth of CNs (scalability, sustainability)
-  - future internet and digital agenda
+However, the characteristics of the investment needs, cost of ownership, and expected return
+of investments outside the traditional telecommunication markets in rural areas or in 
+urban aread with low income individuals or special needs not covered by standard products
+makes those aread very unattractive for traditional telecom providers. It has lead to the
+appropiation of these strategic technologies by the communities themselves, by means of
+self-provision, self-ownership and self-operation. These underserved areas have taken their
+connectivity needs into their own hands, hence, they developed into ``community networks''.
 
-1.2 what research in CN (CN shortomings)
-  - howto impove privacy
-  - networking robustness (eg routing optimization, cross-layer optimizations)
-  - efficient content distribution
-  - network policies evaluation/optimization
-  - heterogenous physical networks (wireless, broadband fiber)
-  - node robustness (eg automatic reconfiguration, deployment, failure handling...)
+Community networking (also known as bottom-up networking) is an emerging model 
+for the Future Internet across Europe and beyond where communities
+of citizens build, operate and own open IP-based networks, a key infrastructure
+for individual and collective digital participation.
 
-1.3 why difficult to do reasearch? (Researcher shortcomings)
-   - there are no real-life CN testbeds (only small lab deployments)
-   - no existing implementations available
-   - community driven effort (not a controlled lab)
+These ``community networks'' (CN) are part of the Internet but differ in several key
+aspects due to their nature: they are open and transparent as there are no barriers of entry
+for participation; governance and knowledge is open, with public documentation on
+every technical and non-technical aspect; they are self-owned as community members
+own the network. Self-managed with decentralized and uncoupled structure that can be open
+for the participation of community members; self-growing in topology and capacity, based not only
+on planning but also on immediate demand, as community members can learn and decide to extend the nework
+to reach a new member or provide more capacity- Thus, these networks are not just
+a path to reach the outside Internet but a local network with internal servers, services and
+internal traffic connected to the Internet.
 
-\section{Related Work}
+Community-Lab is a testbed being deployed by the Confine European
+Integrated Project\cite{confine-web}. This testbed supports experimentally-driven research
+on Community-owned Open Local IP Networks. It integrates and extends 
+three existing community networks: Guifi.net (Catalonia, Spain),
+FunkFeuer (Wien, Austria) and AWMN (Athens, Greece); each is in the
+range of 500 -- 20,000 nodes, a greater number of links and even more end-users.
+These networks are extremely dynamic and diverse, and combine
+successfully different wireless and wired (optical) link technologies, fixed
+and ad-hoc routing schemes, and management schemes. They run multiple
+self-provisioned, experimental and commercial services and applications.
+This testbed provides researchers with access to these emerging
+community networks, supporting any stakeholder interested in developing
+and testing experimental systems and technologies for these open
+and interoperable network infrastructures.
 
-I cite here planetlab \cite{planetlab}
+%1.1 why is research in CN important (Confine-Brochure in www.confine-project.eu)
+%  - to support growth of CNs (scalability, sustainability)
+%  - future internet and digital agenda
+
+The ultimate motivation behind the deployment of such infrastructure is 
+to support the growth of community networks in terms of their scalability and
+sustainability by providing the means to conduct experimentally driven research. 
+We expect that this research will directly impact the quality of community networks
+by improving current short-commings and provising the basis for a real sustainable
+model of community networking.
+
+%1.2 what research in CN (CN shortomings)
+%  - howto impove privacy
+%  - networking robustness (eg routing optimization, cross-layer optimizations)
+%  - efficient content distribution
+%  - network policies evaluation/optimization
+%  - heterogenous physical networks (wireless, broadband fiber)
+%  - node robustness (eg automatic reconfiguration, deployment, failure handling...)
+
+Currently, there are several challenges and lines of research to enhance current
+community networks. Among others, CNs must consider carefully the impact on the privacy of their
+users given their opennes and degree of decentralization; content distribution 
+should be efficient given the constrained resources by improving network robustness 
+-- e.g. routing and cross-layer protocol optimizations; a critical issue is the
+robustness of the nodes participating on the network (e.g. automatic reconfiguration,
+deployment and failure handling, etc.) because they may sit on remote locations not
+easily accessible on a day-to-day basis by community owners; and finally, CNs must handle a whole range
+of heterogeneous physical networks ranging from wireless links to broadband fiber.
+
+%1.3 why difficult to do reasearch? (Researcher shortcomings)
+%   - there are no real-life CN testbeds (only small lab deployments)
+%   - no existing implementations available
+%   - community driven effort (not a controlled lab)
+
+However, these challenges are being addressed currently by means of simulations 
+or on very small controlled lab environments because there exists no real testbed
+to experiment on, which makes the results hard to translate to real scenarios. The Community-Lab testbed
+being deployed by CONFINE tries to provide such infrastructure for researchers to evaluate
+their proposal on an environment with the characteristics (for the best and for the worst)
+of real community networks.
+
+\section{Related Work and Background}
 
 = Other testbeds, what they offer (PlanetLab (Xavi knows well), and wireless
 testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
+There are several initiative in Europe without considering the three CNs participating in this initial
+phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Wien, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
+experimental mesh network in Berlin consisting of nearly 50 indoor nodes mainly to provide
+students with Internet access as well as VoIP. In the USA there are similar initiatives as well. Cities like New York, Seattle, Washington or Austin cooperate with
+public and non-profit organizations to develop and improve free wireless hotspots within 
+their cities to provide citizens with Internet access. Also, the MIT Roofnet project
+is a mesh network consisting of about 50 nodes and covers an area of about four square
+kilometers allowing for small scale and controlled experimentation thanks to the
+Click Modular router integrated within their firmware. However, all these small scale community networks
+are expected to provide a service (Internet connectivity mainly) to users and do not
+cover the necessity of researchers to perform experimentation on top of them.
+
 % Ivan: I need a small introduction to the concept of slice and sliver.
+
+The first initiative of a large-scale testbed to conduct experimental research was introduced by PlanetLab \cite{planetlab}.
+They currently manage a planetary-scale experimental testbed composed of hundreds of nodes to deploy and
+evaluate distributed applications and services in a real environment. The key characteristic of this
+testbed is the concept of resource sharing (as they are scarce) among different researchers by means of
+virtualization. The introduced a basic abstraction called \textit{slice} which enables the isolation
+of different experiments. A \textit{slice} is a ortogonal fraction 
+of the testbed, or in other words, a set of nodes on which applications are assigned a fraction by means of a
+kind of virtual machine called \textit{sliver}. This concept of \textit{slice} has evolved over time to also
+account for network isolation and other type of resources.
+
+If we look at the wireless research area, there are also several initiatives to create a testbed to conduct
+experimental research, but none of them address the problem of high scale deployments nor sharing of resources -- two
+of the main principles behind Community-Lab. For instance, the IBBT w-iLab \cite{ibbt} in Flanders (Belgium), 
+consists of mainly 200 indoor locations spread across three office floors and is mainly composed of sensor networks. In
+Greece, the NITOS testbed enable researchers to completely control the software on the testbed nodes, which denies 
+the possibility of several simultaneous users. Besides, it consist of 40 wifi nodes which only enables 
+small scale experiments.
+
+
 
 \section{Challenges and Requirements}
 
