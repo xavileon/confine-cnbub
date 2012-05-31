@@ -189,16 +189,182 @@ small scale experiments.
 
 % Ivan: I need a reference to slice and network isolation.
 
-2. what challenges it poses to develop a testbed on top of it. ( 3 pages )
-  - keep stability and security
-  - keep CN privacy
-  - researcher affiliation != testbed management ?!= node ownership
-  - usablitiy (simple API despite system complexity)
-  - not CPU powerful devices (cheap)
-  - remote locations
-  - connection instability, variable connectivity and available bandwidth
-  - cross-CN communication (testbed spanning several CNs)
-  - lack of IPv6 support in existing CNs (tinc workaround)
+% 2. what challenges it poses to develop a testbed on top of it. ( 1 page )
+%  - keep stability and security
+%  - keep CN privacy / Network Isolation
+%  - researcher affiliation != testbed management ?!= node ownership
+%  - usablitiy (simple API despite system complexity)
+%  - not CPU powerful devices (cheap)
+%  - remote locations
+%  - connection instability, variable connectivity and available bandwidth
+%  - cross-CN communication (testbed spanning several CNs)
+%  - lack of IPv6 support in existing CNs (tinc workaround)
+%  - Development and Debugging facilities (VCT)
+
+Deploying, managing, and using experimentation facilities in an
+existing CN, where ownership and administration of network
+infrastructure is divided over many entities, imposes a set of new
+challenges and requirements to the design of the CONFINE
+architecture. A selection of most important requirements is briefly
+discussed by the following Subsections.
+
+
+\subsection{Lightweight, Low Cost, Free, and Open Source}
+% Lightweight, Low Cost, Free, and Open Source approaches are important
+% to keep equippment and maintainace cost low, ease reviewing and
+% contribution efforts, and to aim for sustainability and acceptance in
+% the free networks communities.
+
+In order to achieve a widespread deployment of CN nodes supporting the
+CONFINE testbed, existing installations must be extended with new
+components which comes with additional equipment acquisition and
+maintenance cost (eg increased energy consumption) for the node
+owners. Therefore, lightweight and low cost solutions are important to
+keep expenses as low as possible.
+
+Reusing of general accepted approaches and free and Open Source
+software is mandatory to ease reviewing and trust, lower the burden
+for contribution, and to aim for sustainability and acceptance in the
+free networks communities.
+
+\subsection{System Stability}
+
+To facilitate the preparation and execution of experiments,
+researchers should be provided with an environment they are familiar
+with and which allows them to reuse already existing implementations
+and prototypes.  Such environment is given by a Linux OS in
+combination with root permissions which has evolved to a de-facto
+standard environment for networking experiments.
+
+On the other hand, from a security point of view, it must be ensured
+that experiments enabled with root permissions can not affect the
+general CONFINE node system. This can be achieved by isolating
+experiments on dedicated hardware or with virtualization techniques.
+But, despite many mature virtualization solutions exist for UNIX
+systems, few of them have been successfully ported for embedded
+hardware which are commonly used for nodes in CNs.
+
+\subsection{Network Stability}
+%Stability of production network must be ensured despite potentially
+%harmfull experiments.
+Since Confine is aiming to enable community integrated network
+experiments, some (controlled) level of interaction between the
+experiments and the main CN must be possible. On the other hand it
+must be ensured that experiments do not interfere seriously with each
+other nor with the production network.  The potential harm of
+experiments can be classified into two types:
+
+\begin{itemize}
+
+\item Resource Consumption: It must be ensured that each experiment
+  gets a limited but fair share of the available link capacities.
+  Traffic Shaping and Distributed Rate Limiting Techniques can be used
+  here.
+
+\item Conflicting Protocol Behavior: Experimentation with key network
+  services (medium access control, routing, DNS) and other protocol
+  resources (address, port, channel assignments) must be isolated or
+  rigorously controlled.  Firewall or Software Defined Networking
+  techniques (like VLAN tagging) or even the complete physical
+  isolation of link resources are considered depending on the lowest
+  accessed network layer of the experiments.
+
+\end{itemize}
+
+\subsection{Privacy of CN users}
+%Privacy of CN users must be ensured while enabling researchers to do
+%measurements and observations.
+
+While researchers should be conceptually enabled to collect user
+and network data (for statistical evaluation or as real-time feedback
+for protocols), privacy regulations of the corresponding CN licences
+and peering agreements must be respected.
+Therefore, the CONFINE system must provide convinving mechanisms for
+traffic filtering and anonymization of networking data before it is
+provided to researchers.
+
+\subsection{Management Robustness}
+%Management system should be robust against potential connection
+%instabilities to remote experimentation facilities.
+
+One of the interesting characteristics for research in real-life CNs
+is the variety of link setups and stabilities that arise du to the
+decentral management of CN infrastructure and the objective to provide
+connectivity even to remote locations at low cost. Often, such
+locations are abandoned by commercial ISP because of deployment
+challenges and poor revenue perspectives.
+
+Therefore, the system (in charge of managing the distributed
+experiments in CONFINE enabled nodes) must be prepared to deal with
+connectivity starvation and the spontanious appearance and outage of
+links and nodes.
+
+
+\subsection{IP-Address Provisioning}
+%IP address provisioning for experiments despite common scarcity of
+%IPv4 address space and incomplete IPv6 support in many CNs
+
+The objective to allow active experiments on top of existing CN
+infrastructure as well as interaction with users demands the
+provisioning of CN public IP addresses for slivers.
+
+However, due to the general scarcity of IPv4 address space, the
+allocation of unique addresses for experiments is difficult. Also,
+many CN are using their own address allocation sceme based on the
+limited private address ranges for internal routing and end users.
+
+This non-coordinated allocation of IPv4 addresses is raising another
+challenge for the long-term objective to enable federation of CONFINE
+testbeds deployed in different CNs.
+
+Relying on IPv6 seems the natural solution to this challenge but must
+consider the fact that only few existing CNs yet support native IPv6
+routing.
+
+\subsection{Compatibility}
+%Compatibility to variety of existing CN models and heterogeneity of
+%used (often proprietary) soft- and hardware solutions.
+
+Apart from the general requirement for the CONFINE architecture to be
+compatible with the different networking models employed by CNs, the
+CONFINE node system must be compatible to the original system used on
+nodes in the CN.
+
+Because nodes in CNs are setup individually and may be based on
+proprietary and closed software systems, no modifications to the
+original community node firmware should be required and only few
+assumptions should be made on supported features or the concrete
+implementation of a node.
+
+
+\subsection{Role-specific APIs and Usability}
+%Role-specific APIs and access control should be provided for testbed
+%management, node owners, and researchers.
+%Usability -- Tools and APIs for managing and deploying a CONFINE
+%testbed should be as simple and intuitive as possible (for each
+%involved role and despite the intrinsic complexity).
+
+The operation, deployment and usage of a testbed integrated in
+existing CNs involves different roles. In particular, the roles of
+testbed managees, node owners, and researchers have been identified.
+
+In order to simplify the operations related to each role and prevent
+misconfigurations due to overlapping or missing responsibilities, a
+role-specific APIs  and access control should be provided.
+
+Finally, the tools and APIs provided for managing and deploying a
+CONFINE testbed should be as simple and intuitive as possible (for
+each involved role and despite the intrinsic complexity).
+
+
+
+%\subsection{Development Environment}
+%A Development environment is needed, allowing testing and
+%debugging of new software components before being installed into
+%real-life CNs.
+
+
+
 
 \section{CONFINE architecture}
 
