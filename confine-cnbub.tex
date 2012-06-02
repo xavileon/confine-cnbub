@@ -378,6 +378,10 @@ The design described below intends to facilitate the addition of CONFINE nodes
 in any location of a CN by connecting additional devices to existing CN nodes
 with minimum or no CONFINE-specific configuration changes to existing devices.
 
+XXXX begin: Pau
+-integration in community networks
+XXXX end: Pau
+
 \subsection{Long-term vision}
 
 \begin{figure}[!t]
@@ -603,10 +607,6 @@ restrictions on the local and direct interfaces while slivers can still access
 them via passive or isolated interfaces (but not as raw interfaces).  The CC
 may manage several direct interfaces in this way.
 
-XXXX begin: Pau
--integration in community networks
-XXXX end: Pau
-
 \subsection{Current state}
 
 XXXX begin: Axel
@@ -652,10 +652,12 @@ allows setting up a mesh network where data is exchanged directly between
 endpoints with the VPN software taking care of routing traffic and propagating
 endpoint information, thus needing minimal configuration.
 
-As shown in
-figure \ref{fig:ipv6-overlay}, nodes in a CN connect to the testbed server or a CN gateway which
-
-addressing /48 servers, gateways, node devices, slivers, hosts
+As shown in figure \ref{fig:ipv6-overlay}, a \emph{tinc} daemon in a testbed
+node only connects to the testbed server or a CN testbed gateway.  Gateways
+connect between themselves through another network like the Internet.
+Together they form a single routed IPv6 network where individual hosts
+(servers, gateways and clients) and subnetworks (node devices and slivers)
+become available to one another.
 
 Since the overlay makes all elements in the testbed easily reachable through
 predictable IPv6 addresses with automatic encryption and authentication
@@ -664,8 +666,6 @@ These may make the use of the IPv6 overlay interesting even after CNs gain
 widespread IPv6 support.
 
 % XXXX tinc: http://www.tinc-vpn.org/ "tinc"
-
-XXXX
 
 \subsection{Next steps}
 3.3 next steps
