@@ -30,17 +30,24 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Xavier León, Felix freitag and Leandro Navarro}
-\IEEEauthorblockA{Departament d'Arquitectura de Computadors\\
-Universitat Politècnica de Catalunya\\
-Barcelona, Spain\\
-\texttt{\{xleon, felix, leandro\}@ac.upc.edu}}
-\and
-\IEEEauthorblockN{Axel Neumann and Ivan Vilata}
-\IEEEauthorblockA{Pangea.org\\
-NGO Internet Solidario\\
-Barcelona, Spain\\
-\texttt{neumann@cgws.de, ivan@pangea.org}}}
+%\author{%
+%\IEEEauthorblockN{Xavier León, Felix freitag, Leandro Navarro\\and Ester López}
+%\IEEEauthorblockA{%
+%Universitat Politècnica de Catalunya\\
+%Barcelona, Spain\\
+%\texttt{\{xleon, felix, leandro, esterl\}@ac.upc.edu}}
+%\and
+%\IEEEauthorblockN{Axel Neumann and Ivan Vilata}
+%\IEEEauthorblockA{Pangea.org\\
+%NGO Internet Solidario\\
+%Barcelona, Spain\\
+%\texttt{neumann@cgws.de, ivan@pangea.org}}
+%\IEEEauthorblockN{Pau Escrich and Roger Baig}
+%\IEEEauthorblockA{guifi.net\\
+%Community Network\\
+%Catalonia, Spain\\
+%\texttt{\{pau, roger\}@guifi.net}}
+%}
 
 \maketitle
 
@@ -49,12 +56,7 @@ Barcelona, Spain\\
 Community networks are an emerging and successful model for the Future Internet
 across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet
 Research and Experimentation) infrastructures by establishing Community-Lab,
-a new facility built on the federation of
-existing community IP networks constituted by more than 20,000 nodes and 20,000
-Km of links. These unique infrastructures pose an interesting set of challenges different from existing
-testbeds. In this paper we present the benefits of having such testbed for the research community 
-as well as the improvement and evolution of community networks themselves and describes our long-term vision
-for the community network testbed and its current state of implementation.
+a new facility built on the federation of existing community IP networks constituted by more than 20,000 nodes and 20,000 Km of links. These unique infrastructures pose an interesting set of challenges different from existing testbeds. In this paper we present the benefits of having such testbed for the research community as well as the improvement and evolution of community networks themselves. Additionally, we sumarize the challenges encountered and describe our long-term vision for the community network testbed and its current state of implementation.
 \end{abstract}
 
 \section{Introduction}
@@ -68,8 +70,8 @@ real-time audio and video, results in an explosive growth in the demand for capa
 
 However, the characteristics of the investment needs, cost of ownership, and expected return
 of investments outside the traditional telecommunication markets in rural areas or in 
-urban aread with low income individuals or special needs not covered by standard products
-makes those aread very unattractive for traditional telecom providers. It has lead to the
+urban areas with low income individuals or special needs not covered by standard products
+makes those areas very unattractive for traditional telecom providers. It has lead to the
 appropiation of these strategic technologies by the communities themselves, by means of
 self-provision, self-ownership and self-operation. These underserved areas have taken their
 connectivity needs into their own hands, hence, they developed into ``community networks''.
@@ -91,13 +93,13 @@ a path to reach the outside Internet but a local network with internal servers, 
 internal traffic connected to the Internet.
 
 Community-Lab is a testbed being deployed by the Confine European
-Integrated Project\cite{confine-web}. This testbed supports experimentally-driven research
+Integrated Project\footnote{\url{http://www.confine-project.eu}}. This testbed supports experimentally-driven research
 on Community-owned Open Local IP Networks. It integrates and extends 
 three existing community networks: Guifi.net (Catalonia, Spain),
 FunkFeuer (Wien, Austria) and AWMN (Athens, Greece); each is in the
 range of 500 -- 20,000 nodes, a greater number of links and even more end-users.
-These networks are extremely dynamic and diverse, and combine
-successfully different wireless and wired (optical) link technologies, fixed
+These networks are extremely dynamic and diverse. They combine
+successfully different wireless and wired (optical) link technologies, static, dynamic
 and ad-hoc routing schemes, and management schemes. They run multiple
 self-provisioned, experimental and commercial services and applications.
 This testbed provides researchers with access to these emerging
@@ -113,7 +115,7 @@ The ultimate motivation behind the deployment of such infrastructure is
 to support the growth of community networks in terms of their scalability and
 sustainability by providing the means to conduct experimentally driven research. 
 We expect that this research will directly impact the quality of community networks
-by improving current short-commings and provising the basis for a real sustainable
+by improving current short-commings and providing the basis for a sustainable
 model of community networking.
 
 %1.2 what research in CN (CN shortomings)
@@ -168,7 +170,7 @@ cover the necessity of researchers to perform experimentation on top of them.
 The first initiative of a large-scale testbed to conduct experimental research was introduced by PlanetLab \cite{planetlab}.
 They currently manage a planetary-scale experimental testbed composed of hundreds of nodes to deploy and
 evaluate distributed applications and services in a real environment. The key characteristic of this
-testbed is the concept of resource sharing (as they are scarce) among different researchers by means of
+testbed is the concept of resource sharing (given their scarcity) among different researchers by means of
 virtualization. The introduced a basic abstraction called \textit{slice} which enables the isolation
 of different experiments. A \textit{slice} is a ortogonal fraction 
 of the testbed, or in other words, a set of nodes on which applications are assigned a fraction by means of a
