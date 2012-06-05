@@ -376,12 +376,12 @@ and a set of \emph{nodes} which can be spread over several community networks
 CN.  A node can be an integral part of a CN: in contrast with a boundary host,
 a CONFINE node can relay other CN traffic not related with CONFINE.
 
-The design described below intends to facilitate the addition of CONFINE nodes
-in any location of a CN by connecting additional devices to existing CN nodes
-with minimum or no CONFINE-specific configuration changes to existing devices.
-At the same time, it provides researchers with \emph{familiar Linux
-  environments} with \emph{root access} and \emph{rich connectivity options}
-including:
+The design described in this section intends to facilitate the addition of
+CONFINE nodes in any location of a CN by connecting additional devices to
+existing CN ones with minimum or no CONFINE-specific changes to their
+configuration.  At the same time, it provides researchers with \emph{familiar
+  Linux environments} with \emph{root access} and \emph{rich connectivity
+  options} (see \ref{sec:connectivity}) including:
 
 \begin{itemize}
 \item Simple NAT access (like that of most home computers).
@@ -407,20 +407,22 @@ XXXX end: Pau
 
 As shown in figure \ref{fig:node-arch}, a \textbf{CONFINE node} (node)
 consists of two or three devices: the \textbf{community device} (CD), the
-\textbf{research device} (RD) and an optional \textbf{recovery device}.  All
-devices in a node are linked by a wired \textbf{local network} (LN), possibly
-shared with other non-CONFINE devices like CN clients using the CD as a
-gateway.
+\textbf{research device} (RD) and an optional \textbf{recovery device}.  This
+separation tries to preserve the stability of the CD (and thus of the CN) and
+is most compatible with any frmware it may run.  All devices in a node are
+linked by a wired \textbf{local network} (LN), possibly shared with other
+non-CONFINE devices like CN clients using the CD as a gateway.
 
 \subsubsection{The community device}
 
 The CD is a \emph{completely normal community network device} with at least
-two different network interfaces: a wired or wireless one for the CN (a
-\textbf{community interface} with a \textbf{community address}) and a wired
-one for the LN (the \textbf{gateway interface} with its \textbf{gateway
+two different network interfaces: a wired or wireless one connecting to the CN
+(a \textbf{community interface} with a \textbf{community address}) and a wired
+one to the LN (the \textbf{gateway interface} with its \textbf{gateway
   address}).  It can act as a simple gateway for hosts connected to the LN,
-and it allows some of them to have fixed addresses, i.e. addresses that will
-not be assigned by the CD to other devices in the LN via DHCP.
+some of them with fixed addresses not assigned to other devices via DHCP or
+similar.  This allows the use of a uniform address scheme for CONFINE elements
+in the node.
 
 The node is accessed by testbed servers, administrators and researchers via
 the community interfaces of the CD, although node administration may
@@ -441,8 +443,8 @@ ensuring slice and network \emph{isolation}.  This is guaranteed by the
 The RD implements an \textbf{internal bridge} with an \textbf{internal
   address} that is the same in all testbed nodes and which belongs to a
 private network which does not clash with CN or LN addresses.  The RD offers
-some basic \textbf{sliver services} (see below) on the internal address,
-including NAT gateway access to the CN.
+some basic \textbf{sliver services} (see \ref{sec:sliver-services}) on the
+internal address, including NAT gateway access to the CN.
 
 The RD also implements a \textbf{local bridge} which connects to the LN
 through a wired interface (the \textbf{local interface}).  The bridge is used
@@ -458,7 +460,8 @@ network for debugging purposes.
 
 The RD may have additional \textbf{direct interfaces}, each one connected to
 its own \textbf{direct bridge}.  These interfaces may be connected to the CN
-at the link layer.
+at the link layer and used for experiments below the network level (see
+\ref{sec:connectivity}).
 
 All the aforementioned bridges are managed by the control software in order to
 ensure network isolation between slices (i.e. between slivers running in the
@@ -466,16 +469,18 @@ RD) as mentioned above, and to keep CN stability and privacy.
 
 \subsubsection{The recovery device}
 
-The node may include some simple recovery device (which may also be managed
-through the LN) whose purpose is to \emph{force reboot} of the RD in case of
-severe malfunction using some direct hardware mechanism, like a GPIO port
-connected to the power supply of the RD.  The recovery device may get remote
-instructions from the CN (via the LN) or via different sensors, preferably
-based on wide-range technologies suffering from low interference and differing
-from those used by the CN (like ham radio signals, GSM calls or SMS).  It may
-also receive a \emph{heartbeat signal} kept by control software via some
-direct link like a serial line; when the recovery device misses a number of
-heartbeats, it reboots the RD.
+The node may include some simple recovery device whose purpose is to
+\emph{force reboot} of the RD in case of malfunction using some direct
+hardware mechanism (like a GPIO port connected to the power supply of the RD),
+thus avoiding the need for physical presence for rebooting devices in places
+with difficult access.
+
+The recovery device may get remote instructions from the CN (via the LN) or
+via different sensors, preferably based on wide-range technologies suffering
+from low interference and differing from those used by the CN (like ham radio
+signals, GSM calls or SMS).  It may also receive a \emph{heartbeat signal}
+kept by control software via some direct link like a serial line; when the
+recovery device misses a number of heartbeats, it reboots the RD.
 
 A more advanced version of this device may help the RD boot some recovery
 environment (e.g. via PXE) or collaborate in some techniques for safe device
@@ -485,6 +490,7 @@ known state.
 % XXXX van12: https://archive.fosdem.org/2012/schedule/event/safe_upgrade_of_embedded_systems.html "Safe upgrade of embedded systems" Arnaut Vandecappelle, FOSDEM 2012
 
 \subsubsection{Node and sliver connectivity}
+\label{sec:connectivity}
 
 The research and recovery devices have fixed addresses in the LN and they need
 no routing protocol software to reach the CN: they simply use the CD's gateway
@@ -501,16 +507,18 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
 \item Every sliver has a \textbf{private interface and address} whose host
   side \emph{veth} interface is placed in the internal bridge.  The address is
   automatically assigned from the RD's private network, thus allowing access
-  to the RD's internal address and sliver services (see below).  The
-  researcher may choose to use the latter address as the default gateway, in
-  which case traffic is routed by the RD through the local bridge to the CD's
-  gateway address after performing NAT.  This allows \emph{client access to
-    the CN} but not connections from the CN to the sliver (similar to a home
-  computer behind a NAT gateway on the Internet) \emph{nor traffic between
-    slivers}.  Thus the sliver is ensured that there will be no incoming
-  connections on that interface, obviating the need for firewalls or access
-  control.  Sliver container 1 in figure \ref{fig:node-arch} only has a
-  private interface in the internal bridge.
+  to the RD's internal address and sliver services (see
+  \ref{sec:sliver-services}).  The researcher may choose to use the latter
+  address as the default gateway, in which case traffic is routed by the RD
+  through the local bridge to the CD's gateway address after performing NAT.
+  This allows \emph{client access to the CN} but not connections from the CN
+  to the sliver (similar to a home computer behind a NAT gateway on the
+  Internet) \emph{nor traffic between slivers}.  Thus the sliver is ensured
+  that there will be no incoming connections on that interface, obviating the
+  need for firewalls or access control.
+
+  Sliver container 1 in figure \ref{fig:node-arch} only has a private
+  interface in the internal bridge.
 
 \item If the RD has been allocated some public addresses, the researcher may
   request a \textbf{public interface and address} whose host side \emph{veth}
@@ -519,6 +527,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   the researcher may choose to use the CD's gateway address as the default
   gateway.  This allows \emph{connections from the CN to the sliver} (similar
   to a computer directly connected to the Internet through a normal gateway).
+
   Sliver container 2 in figure \ref{fig:node-arch} has a public interface in
   the local bridge.
 
@@ -526,40 +535,46 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   \textbf{passive interface} (with no address) whose host side \emph{veth}
   interface is placed in the associated direct bridge, thus allowing direct
   access to the CN.  Permission is granted only for \emph{traffic capture} on
-  the passive interface, which is mangled by control software to ensure CN
-  privacy (e.g. by implementing the bridge as an Open vSwitch-based switch
-  \cite{open-vswitch} which performs traffic anonymization).  Sliver
-  containers 3 and 5 in figure \ref{fig:node-arch} have passive interfaces in
-  direct bridge X.
+  the passive interface, which is anonymized by control software (e.g. an
+  OpenFlow controller \cite{openflow} on an Open vSwitch-based bridge
+  \cite{open-vswitch}).  This allows \emph{CN traffic analysis} while
+  respecting privacy.
 
+  Sliver containers 3 and 5 in figure \ref{fig:node-arch} have passive
+  interfaces in direct bridge X.
+
+% XXXX openflow: http://www.openflow.org/ "OpenFlow"
 % XXXX open-vswitch: http://openvswitch.org/ "Open vSwitch"
 
 \item If the RD has a direct interface, the researcher may request an
   \textbf{isolated interface} (with no address), i.e. a VLAN interface on the
   associated direct bridge using one of the VLAN tags allocated to the slice
-  at creation time.  This allows \emph{any kind of traffic, including routing
-    protocols, to be transmitted and captured} at the cost of being isolated
-  from the CN at the link layer.  Sliver container 4 in figure
-  \ref{fig:node-arch} has an isolated interface on direct bridge X.
+  at creation time.  \emph{Any kind of traffic can be transmitted and
+    captured} on such an interface at the cost of being isolated from the CN
+  at the link layer.  This allows \emph{routing experiments} to operate safely
+  on close groups of CONFINE nodes.
+
+  Sliver container 4 in figure \ref{fig:node-arch} has an isolated interface
+  on direct bridge X.
 
 \item If the RD has a direct interface, the researcher may request \emph{raw
   access} to the interface's network device.  The \textbf{raw interface} is
   \emph{moved} into the sliver container and the associated direct bridge is
-  disabled while the sliver is running.  Since the sliver has full control on
-  the network device, network isolation can not be guaranteed, so only that
-  sliver is allowed to run in the RD.  Moreover, this access can disrupt CN
-  operation and privacy, so it should only be allowed \emph{under very
-    particular circumstances} (e.g. out of reach of the CN).  Sliver container
-  5 in figure \ref{fig:node-arch} \emph{owns} the RD's direct interface Y.
+  disabled while the sliver is running.  Since the sliver has \emph{full
+    physical control} on the network device, network isolation can not be
+  guaranteed, so only that sliver is allowed to run in the RD.  Moreover, this
+  access can disrupt CN operation and privacy, so it should only be allowed
+  \emph{under very particular circumstances} (e.g. out of reach of the CN).
+
+  Sliver container 5 in figure \ref{fig:node-arch} \emph{owns} the RD's direct
+  interface Y.
 
 \end{itemize}
 
 Besides the included private interface, a sliver may be granted several
 interfaces using the local bridge or any direct bridge.  Conversely, the local
 bridge or a direct bridge may provide several slivers with shared access to
-the same interface; however, since raw access to a direct interface disables
-its bridge, a running sliver granted a raw interface excludes other slivers
-from using the same interface.
+the same interface.
 
 The setup of a sliver's networking is accomplished by populating its image
 with appropriate configuration files.  Static configuration allows testbed
@@ -568,6 +583,7 @@ propagated to other slivers in the same slice) and it can be helpful in the
 configuration of routing, filtering and traffic control rules in the RD.
 
 \subsubsection{Sliver services}
+\label{sec:sliver-services}
 
 The RD offers on its internal address some basic services which become
 available to slivers through their private interfaces.  This setup intends to
@@ -675,9 +691,8 @@ become available to one another.
 
 Since the overlay makes all elements in the testbed easily reachable through
 predictable IPv6 addresses with automatic encryption and authentication
-between endpoints, the IPv6 overlay is used as a \textbf{management network}.
-These may make the use of the IPv6 overlay interesting even after CNs gain
-widespread IPv6 support.
+between endpoints, the IPv6 overlay is used as a \textbf{management network}
+while CNs gain widespread IPv6 support.
 
 % XXXX tinc: http://www.tinc-vpn.org/ "tinc"
 
