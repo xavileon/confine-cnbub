@@ -639,10 +639,97 @@ may manage several direct interfaces in this way.
 
 \subsection{Current state}
 
-XXXX begin: Axel
-3.2 current state
-- implementation (target CONFINED)
-XXXX end: Axel
+% openwrt, trunk (upcoming attitude adjustment release) 
+% management functions, lua-based API, user interfaces based on 
+% ssh, openwrt/debian linux environment
+% supporting:
+% Plans for CONFINED release: fix remaining privacy / security protection
+
+
+% XXXX begin: Axel
+% 3.2 current state
+% - implementation (target CONFINED)
+
+
+
+At the time of writing this document (End of Mai 2012) we are just
+finishing our first release of the CONFINE Node System (CNS) for RDs
+\cite{a-hack}. The main objective of this first version is to provide
+a proof-of concept for selected technologies and be able to gather
+experience from the execution of first experiments on real
+deployments.
+
+CNS is build on top of the upcoming ``Attitude Adjustment'' release
+from OpenWrt \cite{attitudeAdjustment}. The decision to base our work
+on the current developer branch (trunk) of OpenWrt was a trade off
+between the requirement to provide up-to-date implementations for
+quite a number of relatively new Linux networking and virtualization
+technologies and the lack of maturity that comes with development
+branches. 
+
+The current implementation provides role-specific APIs and user
+interfaces for node owners, testbed management, and researchers.
+
+By default, the task of integrating a new CONFINE RD into an existing
+CN is under the control of the node owner.  After the initial flashing
+of the RD with our firmware images (implementing the confine node
+system for a pre-selection of supported X86 hardware like Alix or
+Comell), a node system must be customized for its specific deployment.
+Therefore, a small set of testbed, and node-specific attributes
+(NODE-ID, public keys, .. ) must be exchanged between the node owner
+and the testbed operators via a central web portal and used to
+complete the UCI-based configuration template of the RD.  The
+node-management functions confine\_node\_enable/disable can be used at
+any time to cleanly activate or deactivate the participation of the RD
+in the CONFINE testbed.
+
+The abstract concept of a sliver is realized via virtualization.  To
+provide researchers with a common experimentation environment we
+decided to use Linux Container (LXC) as a very light-weight
+virtualizatinon solution. This allows us to grant researchers root
+access to an OpenWrt or Debian guest system (his slivers), but running
+completly controlled by the CONFINE RD host system. LXC User-space
+tools have been ported for OpenWrt as a new package and are used by
+the CNS to control LXC container internally. This ``sliver''
+environment given by the container OS can be further extended by the
+researcher with additional tools, data, and init scripts to
+automatically execute the processes that define his experiments.
+Interactive access to slivers is provided at any time via ssh and the
+CONFINE management (tinc IPv6 overlay) network.
+
+The role of the testbed operators is to manage the deployment and life
+cycle of experiments (via the concepts of slices and slivers). The
+following set of functions were implemented as bash scripts for remote
+invocation (via ssh and the CONFING management network) from a central
+server of the testbed.
+\begin{itemize}
+\item confine\_sliver\_allocate is used to allocate the resources
+  (like local namespaces, IP addresses, storage ) on a RD that are
+  necessary to execute an experiment. The function requires a sliver
+  description in UCI syntax specifying the required interfaces,
+  addresses and OS type. On success, it returns precise information
+  about the allocated sliver attributes. The attributes of all slivers
+  of a slice must be collected by the server for later summarization
+  and provisioning as slice attributes during the deployment of each
+  sliver. Thereby, each sliver has access to sliver attributes (eg IP
+  addresses) of all other slivers of a slice before it is started.
+\item confine\_sliver\_deploy is used to setup the sliver environment
+  in a RD. Therefore a linux container and root file system is created
+  and customized according to RD, slice, and sliver specific
+  attributes.  The function requires the slice attributes in UCI
+  syntax as input.
+\item confine\_sliver\_start, confine\_sliver\_stop,
+  confine\_sliver\_remove can be used to start, stop, and remove the
+  LXC container related to a given sliver (in the RD where the command
+  is invoked). The last function does also release all allocated
+  resources reserved for that sliver.
+
+\end{itemize}
+
+
+% XXXX end: Axel
+
+
 
 \subsubsection{The IPv6 overlay}
 
