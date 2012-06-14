@@ -236,8 +236,8 @@ into specified topologies, which makes it the largest indoor wireless lab.
 Deploying, managing, and using experimentation facilities in an
 existing CN, where ownership and administration of network
 infrastructure is divided over many entities, imposes a set of new
-challenges and requirements to the design of the Community-Lab
-architecture. A selection of most important requirements is briefly
+challenges and requirements to the design of the
+architecture for Community-Lab. A selection of most important requirements is briefly
 discussed by the following subsections.
 
 
@@ -257,7 +257,9 @@ keep expenses as low as possible.
 Reusing of generally accepted approaches and free and open source
 software is mandatory to ease reviewing and trust, lower the burden
 for contribution, and to aim for sustainability and acceptance in the
-free networks communities.
+free networks communities. For the same reasons, the CONFINE project
+offers the software and documentation needed to set up other testbeds
+(CONFINE testbeds) as free/open source software.
 
 \subsection{System Stability}
 
@@ -270,7 +272,7 @@ standard environment for networking experiments.
 
 On the other hand, from a security point of view, it must be ensured
 that experiments enabled with root permissions can not affect the
-general Community-Lab Node System. This can be achieved by isolating
+general CONFINE Node System used by Community-Lab. This can be achieved by isolating
 experiments on dedicated hardware or with virtualization techniques.
 But, despite many mature virtualization solutions exist for UNIX
 systems, few of them have been successfully ported to embedded
@@ -311,7 +313,7 @@ While researchers should be conceptually enabled to collect user
 and network data (for statistical evaluation or as real-time feedback
 for protocols), privacy regulations of the corresponding CN licences
 and peering agreements must be respected.
-Therefore, the CONFINE system must provide convenient mechanisms for
+Therefore, the CONFINE system used by Community-Lab must provide convenient mechanisms for
 traffic filtering and anonymization of networking data before it is
 provided to researchers.
 
@@ -327,7 +329,7 @@ locations are abandoned by commercial ISPs because of deployment
 challenges and poor revenue perspectives.
 
 Therefore, the system (in charge of managing the distributed
-experiments in Community-Lab enabled nodes) must be prepared to deal with
+experiments in CONFINE enabled nodes like those in Community-Lab) must be prepared to deal with
 connectivity starvation and the spontaneous appearance and outage of
 links and nodes.
 
@@ -346,8 +348,8 @@ many CNs are using their own address allocation schemes based on the
 limited private address ranges for internal routing and end users.
 
 This non-coordinated allocation of IPv4 addresses is raising another
-challenge for the long-term objective to enable federation of Community-Lab
-testbeds deployed in different CNs.
+challenge for the long-term objective to enable federation of CONFINE
+testbeds (like Community-Lab) deployed in different CNs.
 
 Relying on IPv6 seems the natural solution to this challenge but we must
 consider the fact that only few existing CNs yet support native IPv6
@@ -357,9 +359,9 @@ routing.
 %Compatibility to variety of existing CN models and heterogeneity of
 %used (often proprietary) soft- and hardware solutions.
 
-Apart from the general requirement for the Community-Lab architecture to be
+Apart from the general requirement for the CONFINE architecture to be
 compatible with the different networking models employed by CNs, the
-Community-Lab Node System must be compatible with the original system used on
+CONFINE Node System run by Community-Lab must be compatible with the original system used on
 nodes in the CN.
 
 Because nodes in CNs are setup individually and may be based on
@@ -385,7 +387,7 @@ misconfigurations due to overlapping or missing responsibilities,
 role-specific APIs  and access control should be provided.
 
 Finally, the tools and APIs provided for managing and deploying a
-CONFINE testbed should be as simple and intuitive as possible (for
+CONFINE testbed like Community-Lab should be as simple and intuitive as possible (for
 each involved role and despite the intrinsic complexity).
 
 
@@ -405,10 +407,10 @@ A CONFINE testbed like Community-Lab consists of at least one \emph{server} or \
 and a set of \emph{nodes} which can be spread over several community networks
 (CNs).  A server is a normal computer which is publicly reachable inside of a
 CN.  A node can be an integral part of a CN: in contrast with a boundary host,
-a Community-Lab node can relay other CN traffic not related with the testbed.
+a CONFINE testbed node can relay other CN traffic not related with the testbed.
 
 The design described in this section intends to facilitate the addition of
-Community-Lab nodes in any location of a CN by connecting additional devices to
+testbed nodes in any location of a CN by connecting additional devices to
 existing CN ones with minimum or no testbed-specific changes to their
 configuration.  At the same time, it provides researchers with familiar
 Linux environments with root access and rich connectivity
@@ -432,7 +434,7 @@ options (see \ref{sec:connectivity}) including:
 \label{fig:node-arch}
 \end{figure}
 
-As shown in figure \ref{fig:node-arch}, a \textbf{Community-Lab node} (node)
+As shown in figure \ref{fig:node-arch}, a \textbf{CONFINE node} (node)
 consists of two or three devices: the \textbf{community device} (CD), the
 \textbf{research device} (RD) and an optional \textbf{recovery device}.  This
 separation tries to preserve the stability of the CD (and thus of the CN) and
@@ -707,8 +709,8 @@ interfaces for node owners, testbed management, and researchers.
 
 By default, the task of integrating a new testbed RD into an existing
 CN is under the control of the node owner.  After the initial flashing
-of the RD with our firmware image (implementing the CONFINE node
-system for a pre-selection of supported X86 hardware like Alix or
+of the RD with our firmware image (implementing the CONFINE Node
+System for a pre-selection of supported X86 hardware like Alix or
 Commell), a node system must be customized for its specific deployment.
 Therefore, a small set of testbed- and node-specific attributes
 (node ID, public keys...) must be exchanged between the node owner
@@ -732,7 +734,7 @@ environment given by the container OS can be further extended by the
 researcher with additional tools, data, and init scripts to
 automatically execute the processes that define experiments.
 Interactive access to slivers is provided at any time via SSH and the
-Community-Lab management network (\emph{tinc} IPv6 overlay, see next point).
+testbed management network (\emph{tinc} IPv6 overlay, see next point).
 
 The role of the testbed operators is to manage the deployment and life
 cycle of experiments (via the concepts of slices and slivers). The
@@ -805,7 +807,7 @@ resulting topology and can turn the VPN server into a bottleneck --e.g. OpenSSH.
  \caption{Community-Lab integration with existing community networks.}
 \end{figure*}
 
-A CONFINE testbed works around these problems by creating an \textbf{IPv6
+A CONFINE testbed like Community-Lab works around these problems by creating an \textbf{IPv6
   overlay} based on the \emph{tinc} \cite{tinc} VPN software.  \emph{Tinc}
 allows setting up a mesh network where data is exchanged directly between
 endpoints with the VPN software taking care of routing traffic and propagating
@@ -880,7 +882,7 @@ As shown in figure \ref{fig:community_network_integration} (left), a research de
 adopted by a community user not necessary related with the project.
 The RD will be connected to the community device (or CD, which is owned by the person who adopts it) through an Ethernet connection. 
 The research device will obtain a valid community network IP -- depending on the availability of a DHCP server on the community device --
-and it will be reachable from the rest of the network and from the Community-Lab server.
+and it will be reachable from the rest of the network and from the Community-Lab testbed server.
 Experiments between research devices can be performed, however restricted to application layer experiments because of the 
 lack of direct access to the physical layer. If the owner allows it, a WiFi antenna might be 
 added to the research device to allow researchers to obtain valuable link layer information, which could
