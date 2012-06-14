@@ -91,17 +91,17 @@ a new facility built on the federation of existing community IP networks constit
 \section{Introduction}
 
 In the recent years, the perception of the key role of Internet access for the
-digital society and the size, growth and scope of the Internet and has put under stress
+digital society and the size, growth and scope of the Internet has put under stress
 its architecture and protocols. The growing Internet penetration at homes, schools,
-workplaces, and any public or private organisation, the introduction of very demanding
+workplaces, and any public or private organization, and the introduction of very demanding
 and QoS-sensitive applications like distribution of large files, interactive multimedia,
-real-time audio and video, results in an explosive growth in the demand for capacity.
+real-time audio and video result in an explosive growth in the demand for capacity.
 
 However, the characteristics of the investment needs, cost of ownership, and expected return
 of investments outside the traditional telecommunication markets in rural areas or in 
 urban areas with low income individuals or special needs not covered by standard products
-makes those areas very unattractive for traditional telecom providers. It has lead to the
-appropiation of these strategic technologies by the communities themselves, by means of
+make those areas very unattractive for traditional telecom providers. It has lead to the
+appropriation of these strategic technologies by the communities themselves, by means of
 self-provision, self-ownership and self-operation. These underserved areas have taken their
 connectivity needs into their own hands, hence, they developed into ``community networks''.
 
@@ -114,16 +114,16 @@ These ``community networks'' (CN) are part of the Internet but differ in several
 aspects due to their nature: they are open and transparent as there are no barriers of entry
 for participation; governance and knowledge is open, with public documentation on
 every technical and non-technical aspect; they are self-owned as community members
-own the network. Self-managed with decentralized and uncoupled structure that can be open
+own the network; self-managed with decentralized and uncoupled structure that can be open
 for the participation of community members; self-growing in topology and capacity, based not only
 on planning but also on immediate demand, as community members can learn and decide to extend the nework
-to reach a new member or provide more capacity- Thus, these networks are not just
+to reach a new member or provide more capacity. Thus, these networks are not just
 a path to reach the outside Internet but a local network with internal servers, services and
 internal traffic connected to the Internet.
 
 Community-Lab is a testbed being deployed by the CONFINE European
 Integrated Project\footnote{\url{http://www.confine-project.eu}}. This testbed supports experimentally-driven research
-on Community-owned Open Local IP Networks. It integrates and extends 
+on community-owned open local IP networks. It integrates and extends 
 three existing community networks: Guifi.net (Catalonia, Spain),
 FunkFeuer (Wien, Austria) and AWMN (Athens, Greece); each is in the
 range of 500 -- 20,000 nodes, a greater number of links and even more end-users.
@@ -155,9 +155,9 @@ model of community networking.
 %  - heterogenous physical networks (wireless, broadband fiber)
 %  - node robustness (eg automatic reconfiguration, deployment, failure handling...)
 
-Currently, there are several challenges and lines of research to enhance current
+Currently, there are several challenges and lines of research to enhance existing
 community networks. Among others, CNs must consider carefully the impact on the privacy of their
-users given their opennes and degree of decentralization; content distribution 
+users given their openness and degree of decentralization; content distribution 
 should be efficient given the constrained resources by improving network robustness 
 -- e.g. routing and cross-layer protocol optimizations; a critical issue is the
 robustness of the nodes participating on the network (e.g. automatic reconfiguration,
@@ -182,7 +182,7 @@ of real community networks.
 %= Other testbeds, what they offer (PlanetLab (Xavi knows well), and wireless
 %testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
-There are several initiative in Europe without considering the three CNs participating in this initial
+There are several initiatives in Europe without considering the three CNs participating in this initial
 phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Wien, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
 experimental mesh network in Berlin consisting of nearly 50 indoor nodes mainly to provide
 students with Internet access as well as VoIP \cite{berlin-roofnet}. In the USA there are similar initiatives as well. Cities like New York, Seattle, Washington or Austin cooperate with
@@ -202,21 +202,22 @@ The first initiative of a large-scale testbed to conduct experimental research w
 They currently manage a planetary-scale experimental testbed composed of hundreds of nodes to deploy and
 evaluate distributed applications and services in a real environment. The key characteristic of this
 testbed is the concept of resource sharing (given their scarcity) among different researchers by means of
-virtualization. The introduced a basic abstraction called \textit{slice} which enables the isolation
-of different experiments. A \textit{slice} is a ortogonal fraction 
-of the testbed, or in other words, a set of nodes on which applications are assigned a fraction by means of a
+virtualization. PlanetLab introduced a basic abstraction called \textit{slice} which enables the isolation
+of different experiments. A \textit{slice} is an orthogonal fraction 
+of the testbed, or in other words, a set of nodes on which applications are assigned a fraction of resources by means of a
 kind of virtual machine called \textit{sliver}. This concept of \textit{slice} has evolved over time to also
-account for network isolation and other type of resources.
+account for network isolation and other types of resources.
 
 If we look at the wireless research area, there are also several initiatives to create a testbed to conduct
 experimental research, but none of them address the problem of high scale deployments nor sharing of resources -- two
 of the main principles behind Community-Lab. For instance, the IBBT w-iLab \cite{ibbt} in Flanders (Belgium), 
 consists of mainly 200 indoor locations spread across three office floors and is mainly composed of sensor networks. In
-Greece, the NITOS \cite{nitos} testbed enable researchers to completely control the software on the testbed nodes, which denies 
-the possibility of several simultaneous users. Besides, it consists of 40 wifi nodes which only enables 
+Greece, the NITOS \cite{nitos} testbed enables researchers to completely control the software on the testbed nodes, which denies 
+the possibility of several simultaneous users. Besides, it consists of 40 WiFi nodes which only enables 
 small scale experiments. Finally, the ORBIT testbed \cite{orbit} is a large
-indoor two-dimensional grid of arround 400 802.11 radio nodes which can be dynamically interconnected
+indoor two-dimensional grid of around 400 802.11 radio nodes which can be dynamically interconnected
 into specified topologies, which makes it the largest indoor wireless lab.
+
 
 \section{Challenges and Requirements}
 
@@ -239,7 +240,7 @@ existing CN, where ownership and administration of network
 infrastructure is divided over many entities, imposes a set of new
 challenges and requirements to the design of the Community-Lab
 architecture. A selection of most important requirements is briefly
-discussed by the following Subsections.
+discussed by the following subsections.
 
 
 \subsection{Lightweight, Low Cost, Free, and Open Source}
@@ -251,11 +252,11 @@ discussed by the following Subsections.
 In order to achieve a widespread deployment of CN nodes supporting the
 Community-Lab testbed, existing installations must be extended with new
 components which comes with additional equipment acquisition and
-maintenance cost (eg increased energy consumption) for the node
+maintenance cost (e.g. increased energy consumption) for the node
 owners. Therefore, lightweight and low cost solutions are important to
 keep expenses as low as possible.
 
-Reusing of general accepted approaches and free and Open Source
+Reusing of generally accepted approaches and free and open source
 software is mandatory to ease reviewing and trust, lower the burden
 for contribution, and to aim for sustainability and acceptance in the
 free networks communities.
@@ -271,11 +272,11 @@ standard environment for networking experiments.
 
 On the other hand, from a security point of view, it must be ensured
 that experiments enabled with root permissions can not affect the
-general Community-Lab node system. This can be achieved by isolating
+general Community-Lab Node System. This can be achieved by isolating
 experiments on dedicated hardware or with virtualization techniques.
 But, despite many mature virtualization solutions exist for UNIX
-systems, few of them have been successfully ported for embedded
-hardware which are commonly used for nodes in CNs.
+systems, few of them have been successfully ported to embedded
+hardware which is commonly used for nodes in CNs.
 
 \subsection{Network Stability}
 %Stability of production network must be ensured despite potentially
@@ -291,7 +292,7 @@ experiments can be classified into two types:
 
 \item Resource Consumption: It must be ensured that each experiment
   gets a limited but fair share of the available link capacities.
-  Traffic Shaping and Distributed Rate Limiting Techniques can be used
+  Traffic Shaping and Distributed Rate Limiting techniques can be used
   here.
 
 \item Conflicting Protocol Behavior: Experimentation with key network
@@ -312,7 +313,7 @@ While researchers should be conceptually enabled to collect user
 and network data (for statistical evaluation or as real-time feedback
 for protocols), privacy regulations of the corresponding CN licences
 and peering agreements must be respected.
-Therefore, the CONFINE system must provide convinving mechanisms for
+Therefore, the CONFINE system must provide convenient mechanisms for
 traffic filtering and anonymization of networking data before it is
 provided to researchers.
 
@@ -321,15 +322,15 @@ provided to researchers.
 %instabilities to remote experimentation facilities.
 
 One of the interesting characteristics for research in real-life CNs
-is the variety of link setups and stabilities that arise du to the
-decentral management of CN infrastructure and the objective to provide
+is the variety of link setups and stabilities that arise due to the
+decentralized management of CN infrastructure and the objective to provide
 connectivity even to remote locations at low cost. Often, such
-locations are abandoned by commercial ISP because of deployment
+locations are abandoned by commercial ISPs because of deployment
 challenges and poor revenue perspectives.
 
 Therefore, the system (in charge of managing the distributed
 experiments in Community-Lab enabled nodes) must be prepared to deal with
-connectivity starvation and the spontanious appearance and outage of
+connectivity starvation and the spontaneous appearance and outage of
 links and nodes.
 
 
@@ -343,14 +344,14 @@ provisioning of CN public IP addresses for slivers.
 
 However, due to the general scarcity of IPv4 address space, the
 allocation of unique addresses for experiments is difficult. Also,
-many CN are using their own address allocation sceme based on the
+many CNs are using their own address allocation schemes based on the
 limited private address ranges for internal routing and end users.
 
 This non-coordinated allocation of IPv4 addresses is raising another
 challenge for the long-term objective to enable federation of Community-Lab
 testbeds deployed in different CNs.
 
-Relying on IPv6 seems the natural solution to this challenge but must
+Relying on IPv6 seems the natural solution to this challenge but we must
 consider the fact that only few existing CNs yet support native IPv6
 routing.
 
@@ -360,7 +361,7 @@ routing.
 
 Apart from the general requirement for the Community-Lab architecture to be
 compatible with the different networking models employed by CNs, the
-Community-Lab node system must be compatible to the original system used on
+Community-Lab Node System must be compatible with the original system used on
 nodes in the CN.
 
 Because nodes in CNs are setup individually and may be based on
@@ -379,10 +380,10 @@ implementation of a node.
 
 The operation, deployment and usage of a testbed integrated in
 existing CNs involves different roles. In particular, the roles of
-testbed managees, node owners, and researchers have been identified.
+testbed managers, node owners, and researchers have been identified.
 
 In order to simplify the operations related to each role and prevent
-misconfigurations due to overlapping or missing responsibilities, a
+misconfigurations due to overlapping or missing responsibilities,
 role-specific APIs  and access control should be provided.
 
 Finally, the tools and APIs provided for managing and deploying a
@@ -402,7 +403,7 @@ each involved role and despite the intrinsic complexity).
 \section{Community-Lab testbed architecture}
 \label{sec:confine-architecture}
 
-A Community-Lab testbed consists of at least one \emph{server} or \emph{controller}
+A CONFINE testbed like Community-Lab consists of at least one \emph{server} or \emph{controller}
 and a set of \emph{nodes} which can be spread over several community networks
 (CNs).  A server is a normal computer which is publicly reachable inside of a
 CN.  A node can be an integral part of a CN: in contrast with a boundary host,
@@ -411,9 +412,9 @@ a Community-Lab node can relay other CN traffic not related with the testbed.
 The design described in this section intends to facilitate the addition of
 Community-Lab nodes in any location of a CN by connecting additional devices to
 existing CN ones with minimum or no testbed-specific changes to their
-configuration.  At the same time, it provides researchers with \emph{familiar
-  Linux environments} with \emph{root access} and \emph{rich connectivity
-  options} (see \ref{sec:connectivity}) including:
+configuration.  At the same time, it provides researchers with familiar
+Linux environments with root access and rich connectivity
+options (see \ref{sec:connectivity}) including:
 
 \begin{itemize}
 \item Simple NAT access (like that of most home computers).
@@ -459,8 +460,8 @@ occasionally proceed directly through the LN.
 \subsubsection{The research device}
 
 The RD is a relatively powerful device (compared to the CD) running a
-\emph{customised OpenWrt firmware} provided by testbed operators which allows running
-several \emph{slivers} at the same time as Linux containers \cite{lxc}.
+\emph{customised OpenWrt firmware} provided by CONFINE which allows simultaneously running
+several \emph{slivers} implemented as Linux containers \cite{lxc}.
 Slivers have limited access to the device's resources and to one another, thus
 ensuring slice and network \emph{isolation}.  This is guaranteed by the
 \textbf{control software} run in the RD through tools like \texttt{ebtables},
@@ -551,7 +552,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
 \item If the RD has been allocated some public addresses, the researcher may
   request a \textbf{public interface and address} whose host side \emph{veth}
   interface will be placed in the local bridge, thus allowing access to the
-  LN.  The address is automatically assigned from the RD's public ones, and
+  LN.  The address is automatically assigned from the RD's pool of public addresses, and
   the researcher may choose to use the CD's gateway address as the default
   gateway.  This allows \emph{connections from the CN to the sliver} (similar
   to a computer directly connected to the Internet through a normal gateway).
@@ -560,7 +561,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   the local bridge.
 
 \item If the RD has a direct interface, the researcher may request a
-  \textbf{passive interface} (with no address) whose host side \emph{veth}
+  \textbf{passive interface} (with no network address) whose host side \emph{veth}
   interface is placed in the associated direct bridge, thus allowing direct
   access to the CN.  Permission is granted only for \emph{traffic capture} on
   the passive interface, which is anonymized by control software (e.g. an
@@ -576,7 +577,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
 % XXXX open-vswitch: http://openvswitch.org/ "Open vSwitch"
 
 \item If the RD has a direct interface, the researcher may request an
-  \textbf{isolated interface} (with no address), i.e. a VLAN interface on the
+  \textbf{isolated interface} (with no network address), i.e. a VLAN interface on the
   associated direct bridge using one of the VLAN tags allocated to the slice
   at creation time.  \emph{Any kind of traffic can be transmitted and
     captured} on such an interface at the cost of being isolated from the CN
@@ -633,8 +634,8 @@ on the sliver.  Some examples of these (optional) services are:
   network.
 \item A DHCP service which can be used by a sliver as a last resort to regain
   minimum (NAT) connectivity in case of lost network configuration.
-\item DLEP \cite{dlep} can offer slivers information about link quality and
-  speed information from network devices (useful for routing experiments using
+\item DLEP \cite{dlep} can offer link quality and
+  speed information from network devices to slivers (useful for routing experiments using
   cross-layer information).
 \item Other services specific to the testbed for retrieving testbed or slice
   information, or running privileged operations in the RD (like PlanetLab's
@@ -688,14 +689,14 @@ may manage several direct interfaces in this way.
 
 
 
-At the time of writing this document (End of Mai 2012) we are just
-finishing our first release of the Community-Lab Node System (CNS) for RDs
+At the time of writing this document (end of May 2012) we are just
+finishing our first release of the CoNFINE Node System (CNS) for RDs
 \cite{a-hack}. The main objective of this first version is to provide
 a proof-of concept for selected technologies and be able to gather
 experience from the execution of first experiments on real
 deployments.
 
-CNS is build on top of the upcoming ``Attitude Adjustment'' release
+CNS is built on top of the upcoming ``Attitude Adjustment'' release
 from OpenWrt \cite{attitudeAdjustment}. The decision to base our work
 on the current developer branch (trunk) of OpenWrt was a trade off
 between the requirement to provide up-to-date implementations for
@@ -708,54 +709,56 @@ interfaces for node owners, testbed management, and researchers.
 
 By default, the task of integrating a new testbed RD into an existing
 CN is under the control of the node owner.  After the initial flashing
-of the RD with our firmware images (implementing the Community-Lab node
+of the RD with our firmware image (implementing the CONFINE node
 system for a pre-selection of supported X86 hardware like Alix or
-Comell), a node system must be customized for its specific deployment.
-Therefore, a small set of testbed, and node-specific attributes
-(NODE-ID, public keys, .. ) must be exchanged between the node owner
+Commell), a node system must be customized for its specific deployment.
+Therefore, a small set of testbed- and node-specific attributes
+(node ID, public keys...) must be exchanged between the node owner
 and the testbed operators via a central web portal and used to
-complete the UCI-based configuration template of the RD.  The
-node-management functions confine\_node\_enable/disable can be used at
+complete the UCI-based \cite{uci} configuration template of the RD.  The
+node-management functions \texttt{confine\_node\_enable/disable} can be used at
 any time to cleanly activate or deactivate the participation of the RD
 in the testbed.
 
+% XXXX uci: http://wiki.openwrt.org/doc/uci "Unified Configuration Interface"
+
 The abstract concept of a sliver is realized via virtualization.  To
 provide researchers with a common experimentation environment we
-decided to use Linux Container (LXC) as a very light-weight
+decided to use Linux Container (LXC \cite{lxc}) as a very light-weight
 virtualizatinon solution. This allows us to grant researchers root
-access to an OpenWrt or Debian guest system (his slivers), but running
-completly controlled by the RD host system. LXC User-space
-tools have been ported for OpenWrt as a new package and are used by
-the CNS to control LXC container internally. This ``sliver''
+access to an OpenWrt or Debian guest system (the sliver), but running
+completely under control of the CONFINE RD host system. LXC user-space
+tools have been ported to OpenWrt as a new package and are used by
+the CNS to control the LXC container internally. This sliver
 environment given by the container OS can be further extended by the
 researcher with additional tools, data, and init scripts to
-automatically execute the processes that define his experiments.
-Interactive access to slivers is provided at any time via ssh and the
-Community-Lab management (tinc IPv6 overlay) network.
+automatically execute the processes that define experiments.
+Interactive access to slivers is provided at any time via SSH and the
+Community-Lab management network (\emph{tinc} IPv6 overlay, see next point).
 
 The role of the testbed operators is to manage the deployment and life
 cycle of experiments (via the concepts of slices and slivers). The
-following set of functions were implemented as bash scripts for remote
-invocation (via ssh and the CONFING management network) from a central
+following set of functions were implemented as Bash scripts for remote
+invocation (via SSH and the CONFING management network) from a central
 server of the testbed.
 \begin{itemize}
-\item confine\_sliver\_allocate is used to allocate the resources
-  (like local namespaces, IP addresses, storage ) on a RD that are
+\item \texttt{confine\_sliver\_allocate} is used to allocate the resources
+  (like local namespaces, IP addresses, storage) on a RD that are
   necessary to execute an experiment. The function requires a sliver
   description in UCI syntax specifying the required interfaces,
   addresses and OS type. On success, it returns precise information
   about the allocated sliver attributes. The attributes of all slivers
   of a slice must be collected by the server for later summarization
   and provisioning as slice attributes during the deployment of each
-  sliver. Thereby, each sliver has access to sliver attributes (eg IP
-  addresses) of all other slivers of a slice before it is started.
-\item confine\_sliver\_deploy is used to setup the sliver environment
+  sliver. Thereby, each sliver has access to the sliver attributes (e.g. IP
+  addresses) of all other slivers in its slice before it is started.
+\item \texttt{confine\_sliver\_deploy} is used to setup the sliver environment
   in a RD. Therefore a linux container and root file system is created
   and customized according to RD, slice, and sliver specific
   attributes.  The function requires the slice attributes in UCI
   syntax as input.
-\item confine\_sliver\_start, confine\_sliver\_stop,
-  confine\_sliver\_remove can be used to start, stop, and remove the
+\item \texttt{confine\_sliver\_start}, \texttt{confine\_sliver\_stop},
+  \texttt{confine\_sliver\_remove} can be used to start, stop, and remove the
   LXC container related to a given sliver (in the RD where the command
   is invoked). The last function does also release all allocated
   resources reserved for that sliver.
@@ -783,8 +786,8 @@ address scheme for their elements.
 
 IPv6 migration solutions like 6to4 \cite{6to4}, 6in4 \cite{6in4},
 or Teredo \cite{teredo} either have problems with protocol 41
-handling in NAT boxes or firewalls, or use host IPv4-based addresses which can
-clash between CNs.  Together with most VPN solutions they get complicated to
+handling in NAT boxes or firewalls, or they use host IPv4-based addresses which can
+also clash between CNs.  Together with most VPN solutions they get complicated to
 setup in a mesh-like cloud, or use centralized architectures which alter the
 resulting topology and can turn the VPN server into a bottleneck.
 
@@ -926,7 +929,7 @@ metallic mast, electricity box, etc.).
 % \begin{figure*}[!t]
 % \centering
 % \includegraphics[height=0.25\textheight]{community_network_with_cloud_rd}
-% \caption{Multiple nodes of a Confine cloud}
+% \caption{Multiple nodes of a CONFINE cloud}
 % \label{fig:community_network_with_cloud_rd}
 % \end{figure*}
 
