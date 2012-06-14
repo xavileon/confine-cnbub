@@ -28,7 +28,7 @@ urlcolor=Blue
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\renewcommand{\baselinestretch}{0.955}
+\renewcommand{\baselinestretch}{0.952}
 \begin{document}
 
 \title{Community-Lab: vision and architecture of a community networking testbed for the Future Internet}
@@ -592,7 +592,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   \emph{moved} into the sliver container and the associated direct bridge is
   disabled while the sliver is running.  Since the sliver has \emph{full
     physical control} on the network device, network isolation can not be
-  guaranteed, so only that sliver is allowed to run in the RD.  Moreover, this
+  guaranteed, so only that sliver is allowed to interact with that interface (exclusive access).  Moreover, this
   access can disrupt CN operation and privacy, so it should only be allowed
   \emph{under very particular circumstances} (e.g. out of reach of the CN).
 
@@ -789,7 +789,7 @@ or Teredo \cite{teredo} either have problems with protocol 41
 handling in NAT boxes or firewalls, or they use host IPv4-based addresses which can
 also clash between CNs.  Together with most VPN solutions they get complicated to
 setup in a mesh-like cloud, or use centralized architectures which alter the
-resulting topology and can turn the VPN server into a bottleneck.
+resulting topology and can turn the VPN server into a bottleneck --e.g. OpenSSH.
 
 % XXXX 6to4: http://www.ietf.org/rfc/rfc3056.txt "Connection of IPv6 Domains via IPv4 Clouds" IETF RFC 3056
 % XXXX 6in4: http://www.ietf.org/rfc/rfc4213.txt "Basic Transition Mechanisms for IPv6 Hosts and Routers" IETF RFC 4213
