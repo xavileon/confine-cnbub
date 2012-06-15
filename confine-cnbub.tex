@@ -15,20 +15,20 @@
 \usepackage[caption=false,font=footnotesize]{subfig}
 
 \usepackage{url}
-\usepackage{hyperref}
-\hypersetup{ 
-colorlinks,% 
-citecolor=black,% 
-filecolor=black,% 
-linkcolor=black,% 
-urlcolor=Blue 
-}
+%\usepackage{hyperref}
+%\hypersetup{ 
+%colorlinks,% 
+%citecolor=black,% 
+%filecolor=black,% 
+%linkcolor=black,% 
+%urlcolor=Blue 
+%}
 \usepackage[usenames,dvipsnames]{xcolor}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\renewcommand{\baselinestretch}{0.94}
+\renewcommand{\baselinestretch}{0.945}
 \begin{document}
 
 \title{Community-Lab: Vision and Architecture of a Community Networking Testbed for the Future Internet}
@@ -61,7 +61,7 @@ urlcolor=Blue
 Axel Neumann\IEEEauthorrefmark{1},
 Ivan Vilata\IEEEauthorrefmark{1},
 Xavier León\IEEEauthorrefmark{2},
-Pau Escrich\IEEEauthorrefmark{3},
+Pau Escrich Garcia\IEEEauthorrefmark{3},
 Leandro Navarro\IEEEauthorrefmark{2},
 Ester López\IEEEauthorrefmark{2}%
 }
@@ -431,7 +431,8 @@ options (see \ref{sec:connectivity}) including:
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\linewidth]{node-arch}
+\vspace*{0.2cm}
+\includegraphics[width=0.92\linewidth]{node-arch}
 \caption{The architecture of a Community-Lab node.}
 \label{fig:node-arch}
 \end{figure}
@@ -802,10 +803,10 @@ resulting topology and can turn the VPN server into a bottleneck --e.g. OpenSSH.
  \centering
  \subfloat[][Community network deployment]{%
       \label{fig:community_network_simple}%
-      \includegraphics[height=0.18\textheight]{community_network_integration-1}}\\
+      \includegraphics[height=0.16\textheight]{community_network_integration-1}}\\
  \subfloat[][Research devices connected to existing community devices (left) and a complete Community-Lab cloud with community and research devices (right)]{%
       \label{fig:community_network_integration}%
-      \includegraphics[height=0.18\textheight]{community_network_integration-2}}
+      \includegraphics[height=0.16\textheight]{community_network_integration-2}}
  \caption{Community-Lab integration with existing community networks.}
 \end{figure*}
 
