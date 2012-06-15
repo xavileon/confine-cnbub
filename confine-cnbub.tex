@@ -87,6 +87,7 @@ a new facility built on the federation of existing community IP networks constit
 \end{abstract}
 
 \section{Introduction}
+\label{sec:intro}
 
 In the recent years, the perception of the key role of Internet access for the
 digital society and the size, growth and scope of the Internet has put under stress
@@ -116,14 +117,17 @@ own the network; self-managed with distributed and uncoupled structure that can 
 for the participation of community members; self-growing in topology and capacity, based not only
 on planning but also on immediate demand, as community members can learn and decide to extend the nework
 to reach a new member or provide more capacity. Thus, these networks are not just
-a path to reach the outside Internet but a local network with internal servers, services and
-internal traffic connected to the Internet.
+a path to reach the outside Internet but a 
+%local network with internal servers, services and
+%internal traffic connected to the Internet.
+wide area network themselve extending the global internet, with internal servers, services, and traffic. 
+
 
 Community-Lab is a testbed being deployed by the CONFINE European
 Integrated Project\footnote{\url{http://www.confine-project.eu}}. This testbed supports experimentally-driven research
 on community-owned open local IP networks. It integrates and extends 
 three existing community networks: Guifi.net (Catalonia, Spain),
-FunkFeuer (Wien, Austria) and AWMN (Athens, Greece); each is in the
+FunkFeuer (Vienna, Austria) and AWMN (Athens, Greece); each is in the
 range of 500 -- 20,000 nodes, a greater number of links and even more end-users.
 These networks are extremely dynamic and diverse. They combine
 successfully different wireless and wired (optical) link technologies, static, dynamic
@@ -181,7 +185,7 @@ of real community networks.
 %testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
 There are several initiatives in Europe without considering the three CNs participating in this initial
-phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Wien, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
+phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Vienna, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
 experimental mesh network in Berlin consisting of nearly 50 indoor nodes mainly to provide
 students with Internet access as well as VoIP \cite{berlin-roofnet}. In the USA there are similar initiatives as well. Cities like New York, Seattle, Washington or Austin cooperate with
 public and non-profit organizations to develop and improve free wireless hotspots within 
@@ -190,9 +194,10 @@ is a mesh network consisting of about 50 nodes and covers an area of about four 
 kilometers allowing for small scale and controlled experimentation thanks to the
 Click Modular router integrated within their firmware. 
 
-However, all these wireless network deployments 
-are expected to provide a service (Internet connectivity mainly) to users and do not
+However, most of  these wireless network deployments 
+are aiming to provide a service (Internet connectivity mainly) to users and do not
 cover the necessity of researchers to perform experimentation on top of them.
+Non of them are designed to open the testbed facilities to external researchers.
 
 % Ivan: I need a small introduction to the concept of slice and sliver.
 
@@ -340,7 +345,7 @@ links and nodes.
 
 The objective to allow active experiments on top of existing CN
 infrastructure as well as interaction with users demands the
-provisioning of CN public IP addresses for slivers.
+provisioning of CN public IP addresses for experiments.
 
 However, due to the general scarcity of IPv4 address space, the
 allocation of unique addresses for experiments is difficult. Also,
@@ -411,7 +416,7 @@ a CONFINE testbed node can relay other CN traffic not related with the testbed.
 
 The design described in this section intends to facilitate the addition of
 testbed nodes in any location of a CN by connecting additional devices to
-existing CN ones with minimum or no testbed-specific changes to their
+existing CN nodes with minimum or no testbed-specific changes to their
 configuration.  At the same time, it provides researchers with familiar
 Linux environments with root access and rich connectivity
 options (see \ref{sec:connectivity}) including:
@@ -609,7 +614,7 @@ the same interface.
 The setup of a sliver's networking is accomplished by populating its image
 with appropriate configuration files.  Static configuration allows testbed
 servers to know the addresses of a sliver \emph{a priori} (so they can be
-propagated to other slivers in the same slice) and it can be helpful in the
+propagated to other slivers in the same slice) and facilitate the
 configuration of routing, filtering and traffic control rules in the RD.
 
 \subsubsection{Sliver services}
@@ -656,7 +661,7 @@ command execution and file transfer for collecting experiment results.
 
 \subsubsection{The community container}
 
-This architecture also allows a low-cost version where the CD runs inside the
+This architecture also allows a low-cost version of a Community-Lab node where the CD runs virtualized inside the
 RD as a \textbf{community container} (CC) thus saving on hardware at the price
 of stability.  In this case each community interface is considered a direct
 interface in the RD, and the CC has a \emph{veth} interface placed in its
@@ -722,7 +727,7 @@ in the testbed.
 
 % XXXX uci: http://wiki.openwrt.org/doc/uci "Unified Configuration Interface"
 
-The abstract concept of a sliver is realized via virtualization.  To
+The abstract concept of a sliver (as introduced in Section \ref{sec:intro}) is realized via virtualization.  To
 provide researchers with a common experimentation environment we
 decided to use Linux Container (LXC \cite{lxc}) as a very light-weight
 virtualizatinon solution. This allows us to grant researchers root
