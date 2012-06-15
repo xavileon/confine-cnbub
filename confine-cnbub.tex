@@ -28,10 +28,10 @@ urlcolor=Blue
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\renewcommand{\baselinestretch}{0.952}
+\renewcommand{\baselinestretch}{0.94}
 \begin{document}
 
-\title{Community-Lab: vision and architecture of a community networking testbed for the Future Internet}
+\title{Community-Lab: Vision and Architecture of a Community Networking Testbed for the Future Internet}
 
 
 % author names and affiliations
@@ -80,10 +80,7 @@ Ester López\IEEEauthorrefmark{2}%
 
 
 \begin{abstract}
-Community networks are an emerging and successful model for the Future Internet
-across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet
-Research and Experimentation) infrastructures by establishing Community-Lab,
-a new facility built on the federation of existing community IP networks constituted by more than 20,000 nodes and 20,000 Km of links. These unique infrastructures pose an interesting set of challenges different from existing testbeds. In this paper we present the benefits of having such testbed for the research community as well as the improvement and evolution of community networks themselves. Additionally, we sumarize the challenges encountered and describe our long-term vision for the community network testbed and its current state of implementation.
+Community networks are an emerging and successful model for the Future Internet across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet Research and Experimentation) infrastructures by establishing Community-Lab, a new facility built on the federation of existing community IP networks constituted by more than 20,000 nodes and 20,000 Km of links. These unique infrastructures pose an interesting set of challenges different from existing testbeds. In this paper we present the benefits of having such testbed for the research community as well as the improvement and evolution of community networks themselves. Additionally, we summarize the challenges encountered and describe our long-term vision for the community network testbed and its current state of implementation.
 \end{abstract}
 
 \section{Introduction}
@@ -115,12 +112,12 @@ for participation; governance and knowledge is open, with public documentation o
 every technical and non-technical aspect; they are self-owned as community members
 own the network; self-managed with distributed and uncoupled structure that can be open
 for the participation of community members; self-growing in topology and capacity, based not only
-on planning but also on immediate demand, as community members can learn and decide to extend the nework
+on planning but also on immediate demand, as community members can learn and decide to extend the network
 to reach a new member or provide more capacity. Thus, these networks are not just
 a path to reach the outside Internet but a 
 %local network with internal servers, services and
 %internal traffic connected to the Internet.
-wide area network themselve extending the global internet, with internal servers, services, and traffic. 
+wide area network themselves extending the global internet, with internal servers, services, and traffic. 
 
 
 Community-Lab is a testbed being deployed by the CONFINE European
@@ -136,7 +133,7 @@ self-provisioned, experimental and commercial services and applications.
 This testbed provides researchers with access to these emerging
 community networks, supporting any stakeholder interested in developing
 and testing experimental systems and technologies for these open
-and interoperable network infrastructures.
+and inter-operable network infrastructures.
 
 %1.1 why is research in CN important (Confine-Brochure in www.confine-project.eu)
 %  - to support growth of CNs (scalability, sustainability)
@@ -146,10 +143,10 @@ The ultimate motivation behind the deployment of such infrastructure is
 to support the growth of community networks in terms of their scalability and
 sustainability by providing the means to conduct experimentally driven research. 
 We expect that this research will directly impact the quality of community networks
-by improving current short-commings and providing the basis for a sustainable
+by improving current short-comings and providing the basis for a sustainable
 model of community networking.
 
-%1.2 what research in CN (CN shortomings)
+%1.2 what research in CN (CN shortcomings)
 %  - howto impove privacy
 %  - networking robustness (eg routing optimization, cross-layer optimizations)
 %  - efficient content distribution
@@ -188,7 +185,7 @@ There are several initiatives in Europe without considering the three CNs partic
 phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Vienna, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
 experimental mesh network in Berlin consisting of nearly 50 indoor nodes mainly to provide
 students with Internet access as well as VoIP \cite{berlin-roofnet}. In the USA there are similar initiatives as well. Cities like New York, Seattle, Washington or Austin cooperate with
-public and non-profit organizations to develop and improve free wireless hotspots within 
+public and non-profit organizations to develop and improve free wireless hot-spots within 
 their cities to provide citizens with Internet access. Also, the MIT Roofnet \cite{mit-roofnet} project
 is a mesh network consisting of about 50 nodes and covers an area of about four square
 kilometers allowing for small scale and controlled experimentation thanks to the
@@ -316,7 +313,7 @@ experiments can be classified into two types:
 
 While researchers should be conceptually enabled to collect user
 and network data (for statistical evaluation or as real-time feedback
-for protocols), privacy regulations of the corresponding CN licences
+for protocols), privacy regulations of the corresponding CN licenses
 and peering agreements must be respected.
 Therefore, the CONFINE system used by Community-Lab must provide convenient mechanisms for
 traffic filtering and anonymization of networking data before it is
@@ -388,7 +385,7 @@ existing CNs involves different roles. In particular, the roles of
 testbed managers, node owners, and researchers have been identified.
 
 In order to simplify the operations related to each role and prevent
-misconfigurations due to overlapping or missing responsibilities,
+mis-configurations due to overlapping or missing responsibilities,
 role-specific APIs  and access control should be provided.
 
 Finally, the tools and APIs provided for managing and deploying a
@@ -439,11 +436,11 @@ options (see \ref{sec:connectivity}) including:
 \label{fig:node-arch}
 \end{figure}
 
-As shown in figure \ref{fig:node-arch}, a \textbf{CONFINE node} (node)
+As shown in Figure \ref{fig:node-arch}, a \textbf{CONFINE node} (node)
 consists of two or three devices: the \textbf{community device} (CD), the
 \textbf{research device} (RD) and an optional \textbf{recovery device}.  This
 separation tries to preserve the stability of the CD (and thus of the CN) and
-is most compatible with any frmware it may run.  All devices in a node are
+is most compatible with any firmware it may run.  All devices in a node are
 linked by a wired \textbf{local network} (LN), possibly shared with other
 non-testbed devices like CN clients using the CD as a gateway.
 
@@ -465,7 +462,7 @@ occasionally proceed directly through the LN.
 \subsubsection{The research device}
 
 The RD is a relatively powerful device (compared to the CD) running a
-\emph{customised OpenWrt firmware} provided by CONFINE which allows simultaneously running
+\emph{customized OpenWrt firmware} provided by CONFINE which allows simultaneously running
 several \emph{slivers} implemented as Linux containers \cite{lxc}.
 Slivers have limited access to the device's resources and to one another, thus
 ensuring slice and network \emph{isolation}.  This is guaranteed by the
@@ -551,7 +548,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   that there will be no incoming connections on that interface, obviating the
   need for firewalls or access control.
 
-  Sliver container 1 in figure \ref{fig:node-arch} only has a private
+  Sliver container 1 in Figure \ref{fig:node-arch} only has a private
   interface in the internal bridge.
 
 \item If the RD has been allocated some public addresses, the researcher may
@@ -562,7 +559,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   gateway.  This allows \emph{connections from the CN to the sliver} (similar
   to a computer directly connected to the Internet through a normal gateway).
 
-  Sliver container 2 in figure \ref{fig:node-arch} has a public interface in
+  Sliver container 2 in Figure \ref{fig:node-arch} has a public interface in
   the local bridge.
 
 \item If the RD has a direct interface, the researcher may request a
@@ -575,7 +572,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   \cite{open-vswitch}).  This allows \emph{CN traffic analysis} while
   respecting privacy.
 
-  Sliver containers 3 and 5 in figure \ref{fig:node-arch} have passive
+  Sliver containers 3 and 5 in Figure \ref{fig:node-arch} have passive
   interfaces in direct bridge X.
 
 % XXXX openflow: http://www.openflow.org/ "OpenFlow"
@@ -589,7 +586,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   at the link layer.  This allows \emph{routing experiments} to operate safely
   on groups of testbed nodes located nearby.
 
-  Sliver container 4 in figure \ref{fig:node-arch} has an isolated interface
+  Sliver container 4 in Figure \ref{fig:node-arch} has an isolated interface
   on direct bridge X.
 
 \item If the RD has a direct interface, the researcher may request \emph{raw
@@ -601,7 +598,7 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
   access can disrupt CN operation and privacy, so it should only be allowed
   \emph{under very particular circumstances} (e.g. out of reach of the CN).
 
-  Sliver container 5 in figure \ref{fig:node-arch} \emph{owns} the RD's direct
+  Sliver container 5 in Figure \ref{fig:node-arch} \emph{owns} the RD's direct
   interface Y.
 
 \end{itemize}
@@ -695,7 +692,7 @@ may manage several direct interfaces in this way.
 
 
 At the time of writing this document (end of May 2012) we are just
-finishing our first release of the CoNFINE Node System (CNS) for RDs
+finishing our first release of the CONFINE Node System (CNS) for RDs
 \cite{a-hack}. The main objective of this first version is to provide
 a proof-of concept for selected technologies and be able to gather
 experience from the execution of first experiments on real
@@ -715,7 +712,7 @@ interfaces for node owners, testbed management, and researchers.
 By default, the task of integrating a new testbed RD into an existing
 CN is under the control of the node owner.  After the initial flashing
 of the RD with our firmware image (implementing the CONFINE Node
-System for a pre-selection of supported X86 hardware like Alix or
+System for a pre-selection of supported x86 hardware like Alix or
 Commell), a node system must be customized for its specific deployment.
 Therefore, a small set of testbed- and node-specific attributes
 (node ID, public keys...) must be exchanged between the node owner
@@ -730,7 +727,7 @@ in the testbed.
 The abstract concept of a sliver (as introduced in Section \ref{sec:intro}) is realized via virtualization.  To
 provide researchers with a common experimentation environment we
 decided to use Linux Container (LXC \cite{lxc}) as a very light-weight
-virtualizatinon solution. This allows us to grant researchers root
+virtualization solution. This allows us to grant researchers root
 access to an OpenWrt or Debian guest system (the sliver), but running
 completely under control of the CONFINE RD host system. LXC user-space
 tools have been ported to OpenWrt as a new package and are used by
@@ -744,7 +741,7 @@ testbed management network (\emph{tinc} IPv6 overlay, see next point).
 The role of the testbed operators is to manage the deployment and life
 cycle of experiments (via the concepts of slices and slivers). The
 following set of functions were implemented as Bash scripts for remote
-invocation (via SSH and the CONFING management network) from a central
+invocation (via SSH and the CONFINE management network) from a central
 server of the testbed.
 \begin{itemize}
 \item \texttt{confine\_sliver\_allocate} is used to allocate the resources
@@ -805,10 +802,10 @@ resulting topology and can turn the VPN server into a bottleneck --e.g. OpenSSH.
  \centering
  \subfloat[][Community network deployment]{%
       \label{fig:community_network_simple}%
-      \includegraphics[height=0.20\textheight]{community_network_integration-1}}\\
+      \includegraphics[height=0.18\textheight]{community_network_integration-1}}\\
  \subfloat[][Research devices connected to existing community devices (left) and a complete Community-Lab cloud with community and research devices (right)]{%
       \label{fig:community_network_integration}%
-      \includegraphics[height=0.20\textheight]{community_network_integration-2}}
+      \includegraphics[height=0.18\textheight]{community_network_integration-2}}
  \caption{Community-Lab integration with existing community networks.}
 \end{figure*}
 
@@ -818,7 +815,7 @@ allows setting up a mesh network where data is exchanged directly between
 endpoints with the VPN software taking care of routing traffic and propagating
 endpoint information, thus needing minimal configuration.
 
-As shown in figure \ref{fig:ipv6-overlay}, a \emph{tinc} daemon in a testbed
+As shown in Figure \ref{fig:ipv6-overlay}, a \emph{tinc} daemon in a testbed
 node only connects to the testbed server or a CN testbed gateway.  Gateways
 connect between themselves through another network like the Internet.
 Together they form a single routed IPv6 network where individual hosts
@@ -843,7 +840,7 @@ while CNs gain widespread IPv6 support.
 
 What makes the Community-Lab testbed different from existing ones is the integration
 with actual community networks (CNs). The nodes belonging to the testbed are deployed among the 
-community network to be able to perform experiments in a real enviroment with real users. However 
+community network to be able to perform experiments in a real environment with real users. However 
 these networks are indeed production networks, so the experiments must have some limitations or provide some
 degree of protection to community network owners. For instance, nodes placed in the core of the network
 cannot, as a general rule, execute link layer experiments because it can easily disrupt the correct
@@ -864,7 +861,7 @@ which means that each user is the owner of his own device. In a city, where peop
 buildings, the users normally share a single device placed on the roof -- a good practice though
 not always possible.
 
-A typical community network deployment looks like figure \ref{fig:community_network_simple}.
+A typical community network deployment looks like Figure \ref{fig:community_network_simple}.
 The green lines represent WiFi links. Most of these networks are using this technology because 
 it is cheap, easy to use and can be easily obtained. However it might be any other kind of technology 
 such as WiMax, Ethernet or Optical Fiber depending on the owner's needs.
@@ -883,7 +880,7 @@ of covering some of the costs like new links or new nodes. We envision three dif
 \subsubsection{Single research devices connected to existing nodes}
 \label{sec:single-research-devices}
 
-As shown in figure \ref{fig:community_network_integration} (left), a research device (RD) without antennas is 
+As shown in Figure \ref{fig:community_network_integration} (left), a research device (RD) without antennas is 
 adopted by a community user not necessary related with the project.
 The RD will be connected to the community device (or CD, which is owned by the person who adopts it) through an Ethernet connection. 
 The research device will obtain a valid community network IP -- depending on the availability of a DHCP server on the community device --
@@ -891,7 +888,7 @@ and it will be reachable from the rest of the network and from the Community-Lab
 Experiments between research devices can be performed, however restricted to application layer experiments because of the 
 lack of direct access to the physical layer. If the owner allows it, a WiFi antenna might be 
 added to the research device to allow researchers to obtain valuable link layer information, which could
-be usefull to perform long term studies on the real usage of such links.
+be useful to perform long term studies on the real usage of such links.
 
 In this case the CONFINE project only needs to install a single device (the RD) because it uses a existing
 CD owned by the user. 
@@ -915,7 +912,7 @@ described before) will be a requirement. In this case the CONFINE project will a
 \subsubsection{Multiple nodes (cloud) deployed in a specific scenario}
 
 In some specific scenarios controlled by a CONFINE partner -- i.e. university campus -- an entire cloud may be 
-deployed. As shown in figure \ref{fig:community_network_integration} (right), it implies the installation of several 
+deployed. As shown in Figure \ref{fig:community_network_integration} (right), it implies the installation of several 
 nodes. The CD must be a node compatible with the existing CN to be able to connect to it. 
 The RD may contain one or several WiFi antennas and radio devices depending on the characteristics of the experiments to perform. 
 Having several radio devices will allow researchers to execute any kind of link layer experiments given that
@@ -963,12 +960,12 @@ metallic mast, electricity box, etc.).
 \subsection{Discussion}
 
 There are three major characteristics which make the Community-Lab
-testbed of the CONFINE project unique compared to the deployments presented in section \ref{sec:related-work}: i) the 
+testbed of the CONFINE project unique compared to the deployments presented in Section \ref{sec:related-work}: i) the 
 larger scale of the testbed with an expected size of thousands of nodes by the end of the project compared to the few tens
 of nodes of current deployments; ii) the integration within already existing production community networks which provides
-a more realistic scenario for experimentation oposed to controlled lab environments; iii) the support for long term studies
+a more realistic scenario for experimentation opposed to controlled lab environments; iii) the support for long term studies
 of new network protocols and parallel experimental services which share the same wireless infrastructure -- both from the testbed and from the participating wireless community networks -- by means of
-node and network virtualization oposed to other testbeds which provide dedicated nodes to testbed users.
+node and network virtualization opposed to other testbeds which provide dedicated nodes to testbed users.
 Of course, the development of current deployments presented in this section can and should provide a solid foundation for building
 this unique infrastructure.
 
@@ -977,7 +974,7 @@ this unique infrastructure.
 Community networks are an emerging field to provide citizens with connectivity in a sustainable and
 distributed manner in which the owners of the networks are the users themselves. Research on this field
 is necessary to support CNs growth and scope, and improve their operation and quality. However, a few initiatives
-have arised to provide researchers with a platform to conduct such novel experimentation which must
+have arose to provide researchers with a platform to conduct such novel experimentation which must
 push forward this new networking model. The CONFINE project aims to fill this gap by deploying Community-Lab,
 a testbed for community networks inside existing community networks. 
 
