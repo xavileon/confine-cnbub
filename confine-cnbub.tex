@@ -678,6 +678,53 @@ restrictions on the local and direct interfaces while slivers can still access
 them via passive or isolated interfaces (but not as raw interfaces).  The CC
 may manage several direct interfaces in this way.
 
+
+%\subsection{Slice Isolation}
+%
+%To ensure that experiments can not disrupt the productivly used CN nor
+%local services running in the same node or even the same hardware,
+%several aspects must be ensured:
+%
+%\begin{itemize}
+%\item Node-local system resource consumed by slivers remain within
+%  limits so that the host system and other active slivers in a node
+%  have a reasonable share.  This aspect is essentially related to
+%  memory, CPU, interrupt, and disk usage and can be controlled with
+%  resource management concepts of Linux/LXC via ``process control
+%  groups''.
+%
+%\item Network bandwidth consumption of slivers does not exceed
+%  reasonable limits. This can be achieved with common traffic shaping
+%  tools such as tc. In the long term distributed rate limiting
+%  techniques are considered.
+%
+%\item Network access of slivers can not disrupt CN services by
+%  violating protocol aggreements and usage of assigned numbers.
+%  Depending on lowest accessed (experimentally used) network layers
+%  different kind of interfaces are forseend by our architecture to
+%  allow the coexistence of experimental and CN traffic over the shared
+%  network infrastructure.
+%  Usage of Public interface is forseen for transport and higher-layer
+%  experiments, thus require that lower protocol aggreements are
+%  redeemed. In particular, only IP packets, sliver-granted (MAC and
+%  IP) adresses, and whitelisted source and destination ports are
+%  allowed to leave the sliver via these interfaces. This can be
+%  achieved with common firewall techniques and Linux tools like
+%  iptables and ebtables.
+%  Isolated intefaces allow a researcher to do any kind of network (OSI
+%  Layer 3) experiments without respecting protocol and assigned number
+%  agreements. This is possible since all transmitted data will be vlan
+%  tagged (thus encapsulated) and delivered only to neighboring slivers
+%  of the same slice.
+%  Layer 1 and below experiments are only possible via Raw
+%  interfaces. These type of interfaces (if available) are exclusively
+%  allocated to a particular sliver and forseen only for physically
+%  separate environment where transmissions can not interfer with CN
+%  links.
+%
+%\end{itemize}
+
+
 \subsection{Current state}
 
 \begin{figure*}[!t]
