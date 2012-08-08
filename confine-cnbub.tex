@@ -588,12 +588,12 @@ researcher to avoid traffic unexpectedly flowing through unwanted interfaces.
 % XXXX open-vswitch: http://openvswitch.org/ "Open vSwitch"
 
 \item If the RD has a direct interface, the researcher may request an
-  \textbf{isolated interface} (with no network address), i.e. a VLAN interface on the
+  \textbf{isolated interface} (with no pre-assigned network address), i.e. a VLAN interface on the
   associated direct bridge using one of the VLAN tags allocated to the slice
   at creation time.  \emph{Any kind of traffic can be transmitted and
     captured} on such an interface at the cost of being isolated from the CN
-  at the link layer.  This allows \emph{routing experiments} to operate safely
-  on groups of testbed nodes located nearby.
+  at the link layer and delivered only to neighboring slivers of the same slice.  This allows experimentation with network layer protocols and addresses (eg \emph{routing experiments}) to operate safely
+  on groups of nearby located testbed nodes.
 
   Sliver container 4 in Figure \ref{fig:node-arch} has an isolated interface
   on direct bridge X.
