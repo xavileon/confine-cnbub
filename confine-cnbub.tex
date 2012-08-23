@@ -31,7 +31,7 @@
 \renewcommand{\baselinestretch}{0.945}
 \begin{document}
 
-\title{Community-Lab: Vision and Architecture of a Community Networking Testbed for the Future Internet}
+\title{Community-Lab: Architecture of a Community Networking Testbed for the Future Internet}
 
 
 % author names and affiliations
@@ -80,7 +80,7 @@ Ester López\IEEEauthorrefmark{2}%
 
 
 \begin{abstract}
-Community networks are an emerging and successful model for the Future Internet across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet Research and Experimentation) infrastructures by establishing Community-Lab, a new facility built on the federation of existing community IP networks constituted by more than 20,000 nodes and 20,000 Km of links. These unique infrastructures pose an interesting set of challenges different from existing testbeds. In this paper we present the benefits of having such testbed for the research community as well as the improvement and evolution of community networks themselves. Additionally, we summarize the challenges encountered and describe our long-term vision for the community network testbed and its current state of implementation.
+Community networks are an emerging and successful model for the Future Internet across Europe and far beyond. The CONFINE project complements existing FIRE (Future Internet Research and Experimentation) infrastructures by establishing Community-Lab, a new facility for experimentally-driven research built on the federation of existing community IP networks constituted by more than 20,000 nodes and 20,000 Km of links. In this paper we present the benefits of having such testbed for the research community as well as the improvement and evolution of community networks themselves. This paper presents i) the challenges and requirements for Community-Lab, ii) the resulting testbed architecture, iii) the current state of implementation and iv) the integration of the testbed with existing community networks.
 \end{abstract}
 
 \section{Introduction}
@@ -139,7 +139,7 @@ and inter-operable network infrastructures.
 %  - to support growth of CNs (scalability, sustainability)
 %  - future internet and digital agenda
 
-The ultimate motivation behind the deployment of such infrastructure is 
+The ultimate motivation behind the deployment of such research infrastructure is 
 to support the growth of community networks in terms of their scalability and
 sustainability by providing the means to conduct experimentally driven research. 
 We expect that this research will directly impact the quality of community networks
@@ -169,19 +169,14 @@ of heterogeneous physical networks ranging from wireless links to broadband fibe
 %   - no existing implementations available
 %   - community driven effort (not a controlled lab)
 
-However, these challenges are being addressed currently by means of simulations 
-or on very small controlled lab environments because there exists no real testbed
-to experiment on, which makes the results hard to translate to real scenarios. The Community-Lab testbed
-being deployed by CONFINE tries to provide such infrastructure for researchers to evaluate
-their proposal on an environment with the characteristics (for the best and for the worst)
-of real community networks.
+However, these challenges are being addressed currently by means of simulations or on very small controlled lab environments because there exists no real testbed to experiment on, which makes the results hard to translate to real scenarios. The Community-Lab testbed being deployed by CONFINE tries to provide such infrastructure for researchers to evaluate their proposal on an environment with the characteristics (for the best and for the worst) of real community networks. The aim of this paper is presenting the architecture of the Community-Lab testbed.  The next section presents related work and background. Section \ref{sec:challenges-requirements} describes the requirements for the testbed and related challenges. Section \ref{sec:confine-architecture} describes the resulting Community-Lab architecture with its structure, directions, current status integration with community networks, and finally a brief discussion.
 
 \section{Related Work and Background}
 \label{sec:related-work}
 %= Other testbeds, what they offer (PlanetLab (Xavi knows well), and wireless
 %testbeds that are known from papers (Berlin testbeds, Nitos, ...?)
 
-There are several initiatives in Europe without considering the three CNs participating in this initial
+There are several initiatives in Europe beyond the three CNs participating in this initial
 phase of the testbed --guifi.net (Catalonia, Spain), FunkFeuer (Vienna, Austria) and AWMN (Athens, Greece). The Berlin RoofNet project is an
 experimental mesh network in Berlin consisting of nearly 50 indoor nodes mainly to provide
 students with Internet access as well as VoIP \cite{berlin-roofnet}. In the USA there are similar initiatives as well. Cities like New York, Seattle, Washington or Austin cooperate with
@@ -220,6 +215,7 @@ into specified topologies, which makes it the largest indoor wireless lab.
 
 
 \section{Challenges and Requirements}
+\label{sec:challenges-requirements}
 
 % Ivan: I need a reference to slice and network isolation.
 
